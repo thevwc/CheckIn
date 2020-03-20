@@ -1,0 +1,116 @@
+2020-03-07 11:49:15,213 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:50:51,817 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:52:29,249 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:58:31,001 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:02:05,698 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:02:33,348 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 144, in processCheckIn
+    activity = MemberActivity(Member_ID=villageID,Check_In_Date_Time=checkInDateTime,Type_Of_Work=typeOfWork,shopNumber=shopNumber,Door_Used='Front')
+  File "<string>", line 4, in __init__
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\orm\state.py", line 441, in _initialize_instance
+    manager.dispatch.init_failure(self, args, kwargs)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\compat.py", line 153, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\orm\state.py", line 438, in _initialize_instance
+    return manager.original_init(*mixed[1:], **kwargs)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\ext\declarative\base.py", line 840, in _declarative_constructor
+    "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+TypeError: 'shopNumber' is an invalid keyword argument for MemberActivity
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 110, in checkIn
+    processCheckIn(villageID,typeOfWorkToUse,shopNumber)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 151, in processCheckIn
+    flash("Check in could not be added.\n"+e,"danger")
+TypeError: can only concatenate str (not "TypeError") to str
+2020-03-07 12:03:59,361 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:04:22,534 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:05:52,629 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:18:56,861 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:19:23,387 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 144, in processCheckIn
+    activity = MemberActivity(Member_ID=villageID,Check_In_Date_Time=checkInDateTime,Type_Of_Work=typeOfWork,Shop_Number=int(shopNumber),Door_Used='Front')
+  File "<string>", line 4, in __init__
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\orm\state.py", line 441, in _initialize_instance
+    manager.dispatch.init_failure(self, args, kwargs)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\compat.py", line 153, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\orm\state.py", line 438, in _initialize_instance
+    return manager.original_init(*mixed[1:], **kwargs)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\ext\declarative\base.py", line 840, in _declarative_constructor
+    "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+TypeError: 'Door_Used' is an invalid keyword argument for MemberActivity
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 110, in checkIn
+    processCheckIn(villageID,typeOfWorkToUse,shopNumber)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 149, in processCheckIn
+    except SQLAlchemyError as err:
+NameError: name 'SQLAlchemyError' is not defined
+2020-03-07 12:20:08,395 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:37:49,670 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:38:11,465 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 111, in checkIn
+    processCheckIn(villageID,typeOfWorkToUse,shopNumber)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 145, in processCheckIn
+    activity = MemberActivity(Member_ID=villageID,Check_In_Date_Time=checkInDateTime,Type_Of_Work=typeOfWork,Shop_Number=int(shopNumber),Door_Used='Front')
+  File "<string>", line 4, in __init__
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\orm\state.py", line 441, in _initialize_instance
+    manager.dispatch.init_failure(self, args, kwargs)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\compat.py", line 153, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\orm\state.py", line 438, in _initialize_instance
+    return manager.original_init(*mixed[1:], **kwargs)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\ext\declarative\base.py", line 840, in _declarative_constructor
+    "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+TypeError: 'Door_Used' is an invalid keyword argument for MemberActivity
+2020-03-07 12:40:07,935 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]

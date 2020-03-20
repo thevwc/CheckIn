@@ -1,0 +1,114 @@
+2020-03-07 09:40:33,704 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 09:42:37,412 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 09:44:16,406 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 09:45:16,273 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 09:47:20,971 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 09:50:53,697 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 09:54:47,179 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 09:55:57,061 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 10:58:55,437 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:00:31,314 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:02:37,066 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:03:23,802 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:06:56,755 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:09:32,631 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:21:11,422 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:26:05,920 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:27:08,755 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:27:55,579 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 61, in checkIn
+    processCheckIn(villageID,typeOfWorkToUse)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 144, in processCheckIn
+    + memberID + """', '""" + checkInDateTime + """', '""" + checkInTypeOfWork + """','FRONT', """ + shopNumber + """)"""
+NameError: name 'memberID' is not defined
+2020-03-07 11:28:57,028 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:29:22,698 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 61, in checkIn
+    processCheckIn(villageID,typeOfWorkToUse)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 144, in processCheckIn
+    + villageID + """', '""" + checkInDateTime + """', '""" + checkInTypeOfWork + """','FRONT', """ + shopNumber + """)"""
+TypeError: bad operand type for unary +: 'str'
+2020-03-07 11:34:29,337 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:34:50,671 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 61, in checkIn
+    processCheckIn(villageID,typeOfWorkToUse)
+TypeError: processCheckIn() missing 1 required positional argument: 'shopNumber'
+2020-03-07 11:36:16,536 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:36:40,624 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 110, in checkIn
+    processCheckIn(villageID,typeOfWorkToUse,shopNumber)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 141, in processCheckIn
+    + villageID + """', '""" + checkInDateTime + """', '""" + typeOfWork + """','FRONT', """ + shopNumber + """)"""
+TypeError: bad operand type for unary +: 'str'
+2020-03-07 11:38:12,903 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 11:38:30,179 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 110, in checkIn
+    processCheckIn(villageID,typeOfWorkToUse,shopNumber)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 141, in processCheckIn
+    + villageID + """', '""" + checkInDateTime + """', '""" + typeOfWork + """','FRONT', """ + str(shopNumber) + """)"""
+TypeError: bad operand type for unary +: 'str'

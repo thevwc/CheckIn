@@ -1,0 +1,81 @@
+2020-03-05 12:03:47,471 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\result.py", line 1266, in fetchone
+    row = self._fetchone_impl()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\result.py", line 1146, in _fetchone_impl
+    return self.cursor.fetchone()
+pyodbc.ProgrammingError: Attempt to use a closed cursor.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 42, in checkIn
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\result.py", line 1274, in fetchone
+    e, None, None, self.cursor, self.context
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1476, in _handle_dbapi_exception
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\compat.py", line 398, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\compat.py", line 152, in reraise
+    raise value.with_traceback(tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\result.py", line 1266, in fetchone
+    row = self._fetchone_impl()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\result.py", line 1146, in _fetchone_impl
+    return self.cursor.fetchone()
+sqlalchemy.exc.ProgrammingError: (pyodbc.ProgrammingError) Attempt to use a closed cursor.
+(Background on this error at: http://sqlalche.me/e/f405)
+2020-03-05 12:04:13,708 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 12:22:14,374 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 12:24:42,396 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 12:25:11,229 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 12:26:14,095 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 13:51:52,247 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 13:54:07,938 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 13:56:34,181 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 13:57:29,954 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 14:10:31,087 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 14:12:36,862 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 14:14:06,784 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 14:15:28,682 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 14:16:53,784 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 14:19:38,824 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 14:26:49,385 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 14:29:45,676 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 15:39:35,082 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 15:40:21,657 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 15:44:18,193 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 15:45:05,772 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 15:45:24,462 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 22, in checkIn
+    index2()
+NameError: name 'index2' is not defined
+2020-03-05 15:46:04,751 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 16:04:48,181 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 16:05:54,859 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 16:08:30,555 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-05 16:08:58,731 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]

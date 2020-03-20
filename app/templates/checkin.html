@@ -1,0 +1,109 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+    {{super()}}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkin.css') }}">  
+{% endblock %}
+
+{% block scripts %}
+	{{super()}}
+	<script src="{{ url_for('static', filename='js/checkin.js') }}">  </script>
+{% endblock %}
+
+{% block content %}
+<div class= "container hdg">
+  <h1>THE VILLAGES WOODWORKERS CLUB</h1>
+</div>
+
+<div class = "wrapper">
+  <div class="memberName">
+    <h2>Name:</h2>
+  </div>
+  <div class="memberNameData">
+    <input type="text"id="memberName" class = "display-screen" value=" " disabled />
+  </div>
+  <div class="inLabel">
+    <h2 style="text-align: end">Check in time:</h2>
+  </div>
+  <div class="inTime">
+    <input type="text" id="checkInTime" style = color:green class = "display-screen" value="" disabled />
+  </div>
+  <div class="outLabel">
+    <h2 style="text-align: end">Check out time:</h2>
+  </div>
+  <div class="outTime">
+    <input type="text"id="checkOutTime" style = color:red class = "display-screen" value="" disabled />
+  </div>
+</div>
+
+<div class = "container">
+  <div class="typeOfWork col-sm-6">
+    <input type="text" id=typeOfWork class="typeOfWork-screen" placeholder="General" value="General" disabled />
+    <div class = "typeOfWork-keys">
+      <button type="button" value="Admin">Admin</button>
+      <button type="button" value="Carver">Carver</button>
+      <button type="button" value="Education">Education</button>
+      <button type="button" value="General">General</button>
+      <button type="button" value="Painting">Painting</button>
+    
+      <button type="button" value="Repair">Repair</button>
+      <button type="button" value="Spec Proj">Spec Proj</button>
+      <button type="button" value="Stained Glass">Stained Glass</button>
+      <button type="button" value="Toys">Toys</button>
+      <button type="button" value="Turner">Turner</button>
+    </div>
+  </div>
+</div>
+
+
+<div class = "container">
+  <div class="calculator col-sm-6">
+    <p></p>
+    <div id="result">
+      <input  type="text" class="calculator-screen" id="memberInput" placeholder="" value="" disabled />
+    </div>
+
+    <div class="calculator-keys">
+      
+      <button id="calculatorKey" type="button" value="7">7</button>
+      <button id="calculatorKey" type="button" value="8">8</button>
+      <button id="calculatorKey" type="button" value="9">9</button>
+  
+      <button id="calculatorKey" type="button" value="4">4</button>
+      <button id="calculatorKey" type="button" value="5">5</button>
+      <button id="calculatorKey" type="button" value="6">6</button>
+  
+      <button id="calculatorKey" type="button" value="1">1</button>
+      <button id="calculatorKey" type="button" value="2">2</button>
+      <button id="calculatorKey" type="button" value="3">3</button>
+  
+      <button id="calculatorKey" type="button" class="all-clear" value="all-clear">CLR</button>
+      <button id="calculatorKey" type="button" value="0">0</button>
+      <button id="calculatorKey" type="button" class="enter-key" value="enter">Enter</button>
+  
+    </div>
+  </div>
+</div>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="myModalMsg" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id=modalBody>
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  
+</div>
+      {% endblock %}
