@@ -19,7 +19,7 @@ $(document).ready(function() {
       // Create an XHR object; set url
       let xhr = new XMLHttpRequest();
       let url = "/checkIn";
-
+      console.log('Open a connection ...')
       // Open a connection
       try {
         xhr.open("POST", url, true);
@@ -32,19 +32,23 @@ $(document).ready(function() {
        xhr.setRequestHeader("Content-Type", "application/json");
       
       // Send data to server
+      console.log('Send data to server ...')
       try {     
         var data = JSON.stringify({"memberID":curNumber, "typeOfWork":typeOfWork});
+        alert('data - '+data)
         xhr.send(data);
       }
       catch(err) {
         alert("Send failed " + err);
       }
       // Create a state change callback
+      console.log('onreadystatechange ...')
       xhr.onreadystatechange = function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log('get response from server ...')
         // Get response from server
         result = JSON.parse(this.responseText);
-        
+        console.log('response - ' + result)
         // ID not found
         if (result.status == 'Not Found') {
           msg = "The village ID '" + curNumber + "' was not found."

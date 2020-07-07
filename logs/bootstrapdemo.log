@@ -1,52 +1,87 @@
-2020-03-07 14:26:20,246 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 14:27:05,371 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 15:11:03,178 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 15:12:42,952 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 15:17:52,914 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 15:40:46,857 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 15:43:45,523 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 15:45:48,835 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 15:49:13,700 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 16:00:53,836 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 16:03:17,597 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 16:05:35,762 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 16:16:04,647 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 16:17:49,591 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 16:20:27,988 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 16:22:41,979 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 16:23:56,923 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 16:26:27,703 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 16:31:28,897 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-07 16:32:50,456 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 10:37:08,664 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 10:51:51,108 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:01:24,422 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:02:16,406 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:03:07,899 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:07:32,730 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:18:13,695 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:22:03,445 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:22:18,592 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+2020-07-06 11:35:15,007 ERROR: Exception on /checkIn [POST] [in c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\flask\app.py:1891]
 Traceback (most recent call last):
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
-    response = self.full_dispatch_request()
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2276, in _wrap_pool_connect
+    return fn()
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 773, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 139, in _do_get
+    self._dec_overflow()
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\util\compat.py", line 153, in reraise
     raise value
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 652, in __connect
+    connection = pool._invoke_creator(self)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\engine\strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\engine\default.py", line 489, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+pyodbc.ProgrammingError: ('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open server 'vwcweb' requested by the login. Client with IP address '73.21.244.163' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect. (40615) (SQLDriverConnect); [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open server 'vwcweb' requested by the login. Client with IP address '73.21.244.163' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect. (40615)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
     rv = self.dispatch_request()
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 100, in checkIn
-    and Format(Check_In_Date_Time,'yyyy-mm-dd') = '""" + todaysDate + """'"""
-TypeError: can only concatenate str (not "datetime.date") to str
-2020-03-08 11:23:09,823 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:25:01,619 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:42:15,806 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:49:29,900 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:55:16,835 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-08 11:59:33,215 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-20 12:02:31,055 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+  File "C:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 34, in checkIn
+    member = db.engine.execute(sqlSelect)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2181, in execute
+    connection = self._contextual_connect(close_with_result=True)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2242, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2280, in _wrap_pool_connect
+    e, dialect, self
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1547, in _handle_dbapi_exception_noconnection
+    util.raise_from_cause(sqlalchemy_exception, exc_info)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\util\compat.py", line 398, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\util\compat.py", line 152, in reraise
+    raise value.with_traceback(tb)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2276, in _wrap_pool_connect
+    return fn()
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 363, in connect
+    return _ConnectionFairy._checkout(self)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 773, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 492, in checkout
+    rec = pool._do_get()
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 139, in _do_get
+    self._dec_overflow()
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\util\compat.py", line 153, in reraise
+    raise value
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 136, in _do_get
+    return self._create_connection()
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 308, in _create_connection
+    return _ConnectionRecord(self)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 437, in __init__
+    self.__connect(first_connect_check=True)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\pool\base.py", line 652, in __connect
+    connection = pool._invoke_creator(self)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\engine\strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "c:\users\richa\onedrive\projects\azurecheckin\venv\lib\site-packages\sqlalchemy\engine\default.py", line 489, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+sqlalchemy.exc.ProgrammingError: (pyodbc.ProgrammingError) ('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open server 'vwcweb' requested by the login. Client with IP address '73.21.244.163' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect. (40615) (SQLDriverConnect); [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open server 'vwcweb' requested by the login. Client with IP address '73.21.244.163' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect. (40615)")
+(Background on this error at: http://sqlalche.me/e/f405)

@@ -1,13 +1,4 @@
-2020-03-05 16:20:55,895 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
-Traceback (most recent call last):
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1246, in _execute_context
-    cursor, statement, parameters, context
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\default.py", line 588, in do_execute
-    cursor.execute(statement, parameters)
-pyodbc.ProgrammingError: ('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near ';'. (102) (SQLExecDirectW)")
-
-The above exception was the direct cause of the following exception:
-
+2020-03-07 12:41:04,463 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
 Traceback (most recent call last):
   File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
     response = self.full_dispatch_request()
@@ -21,52 +12,12 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 90, in checkIn
-    activity = db.engine.execute(sqlCheckInRecord)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2182, in execute
-    return connection.execute(statement, *multiparams, **params)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 976, in execute
-    return self._execute_text(object_, multiparams, params)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1149, in _execute_text
-    parameters,
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1250, in _execute_context
-    e, statement, parameters, cursor, context
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1476, in _handle_dbapi_exception
-    util.raise_from_cause(sqlalchemy_exception, exc_info)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\compat.py", line 398, in raise_from_cause
-    reraise(type(exception), exception, tb=exc_tb, cause=cause)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\compat.py", line 152, in reraise
-    raise value.with_traceback(tb)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1246, in _execute_context
-    cursor, statement, parameters, context
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\default.py", line 588, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.ProgrammingError: (pyodbc.ProgrammingError) ('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near ';'. (102) (SQLExecDirectW)")
-[SQL: SELECT Member_ID, Check_In_Date_Time, Check_Out_Date_Time, Type_Of_Work
-            FROM tblMember_Activity 
-            WHERE Member_ID = '604875' AND Check_Out_Date_Time Is Null 
-            AND Check_In_Date_Time = CAST (getdate() as Date; ]
-(Background on this error at: http://sqlalche.me/e/f405)
-2020-03-05 16:30:02,447 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-05 16:38:54,078 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-05 16:40:49,724 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-05 16:49:07,362 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-05 16:50:40,321 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-05 16:52:53,375 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-05 16:56:50,634 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-05 16:59:22,246 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-05 17:00:19,150 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-05 17:02:21,683 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-05 17:02:50,578 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
-Traceback (most recent call last):
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1246, in _execute_context
-    cursor, statement, parameters, context
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\default.py", line 588, in do_execute
-    cursor.execute(statement, parameters)
-pyodbc.DataError: ('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Conversion failed when converting date and/or time from character string. (241) (SQLExecDirectW)')
-
-The above exception was the direct cause of the following exception:
-
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 121, in checkIn
+    processCheckOut(villageID)
+TypeError: processCheckOut() missing 1 required positional argument: 'typeOfWork'
+2020-03-07 12:51:16,933 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:52:04,685 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:52:21,071 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
 Traceback (most recent call last):
   File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
     response = self.full_dispatch_request()
@@ -80,35 +31,83 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 91, in checkIn
-    activity = db.engine.execute(sqlCheckInRecord)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2182, in execute
-    return connection.execute(statement, *multiparams, **params)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 976, in execute
-    return self._execute_text(object_, multiparams, params)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1149, in _execute_text
-    parameters,
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1250, in _execute_context
-    e, statement, parameters, cursor, context
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1476, in _handle_dbapi_exception
-    util.raise_from_cause(sqlalchemy_exception, exc_info)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\compat.py", line 398, in raise_from_cause
-    reraise(type(exception), exception, tb=exc_tb, cause=cause)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\util\compat.py", line 152, in reraise
-    raise value.with_traceback(tb)
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1246, in _execute_context
-    cursor, statement, parameters, context
-  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\sqlalchemy\engine\default.py", line 588, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.DataError: (pyodbc.DataError) ('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Conversion failed when converting date and/or time from character string. (241) (SQLExecDirectW)')
-[SQL: SELECT Member_ID, Check_In_Date_Time, Check_Out_Date_Time, Type_Of_Work
-            FROM tblMember_Activity 
-            WHERE Member_ID = '604875' AND Check_Out_Date_Time Is Null 
-            AND Format(Check_In_Date_Time,'mm/dd/yyyy') >= CAST (GETDATE() as DATE) ]
-(Background on this error at: http://sqlalche.me/e/9h9h)
-2020-03-05 17:04:14,365 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-06 08:58:44,307 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-06 09:04:40,900 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-06 09:06:13,464 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-06 09:21:07,127 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
-2020-03-06 09:24:45,135 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 130, in checkIn
+    res = make_response(jsonify(response_body),200)
+UnboundLocalError: local variable 'response_body' referenced before assignment
+2020-03-07 12:53:48,434 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:57:10,734 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 12:57:56,096 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 119, in checkIn
+    print(res)
+UnboundLocalError: local variable 'res' referenced before assignment
+2020-03-07 12:59:28,262 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:00:59,915 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:01:44,111 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 116, in checkIn
+    "checkInTime":datetime.today().strftime('%I:%M %p'),
+AttributeError: module 'datetime' has no attribute 'today'
+2020-03-07 13:04:31,985 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:05:14,823 ERROR: Exception on /checkIn [POST] [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\venv\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\routes.py", line 116, in checkIn
+    "checkInTime":datetime.now().strftime('%I:%M %p'),
+AttributeError: module 'datetime' has no attribute 'now'
+2020-03-07 13:11:59,260 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:14:00,351 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:16:54,017 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:17:49,365 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:20:38,577 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:23:16,159 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:27:39,838 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:30:08,444 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:31:50,388 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:34:45,650 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:36:48,287 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:45:14,364 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:47:25,978 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:50:52,733 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:52:27,019 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:53:35,781 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 13:56:12,452 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 14:13:25,669 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 14:15:02,238 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 14:16:03,460 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
+2020-03-07 14:17:11,338 INFO: Check In startup [in c:\Users\richa\OneDrive\Projects\AzureCheckIn\app\__init__.py:29]
