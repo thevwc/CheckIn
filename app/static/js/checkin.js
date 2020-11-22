@@ -34,7 +34,6 @@ $(document).ready(function() {
       // Send data to server
       try {     
         var data = JSON.stringify({"memberID":curNumber, "typeOfWork":typeOfWork});
-        alert('data - '+data)
         xhr.send(data);
       }
       catch(err) {
@@ -57,7 +56,6 @@ $(document).ready(function() {
         if (result.status == 'Not Certified') {
           document.getElementById("memberName").value = result.memberName;
           modalAlert("CHECK IN STATUS",result.msg)
-          //alert(result.msg)
           clearScreen()
           return
         }

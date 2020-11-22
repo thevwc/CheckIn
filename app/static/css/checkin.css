@@ -181,8 +181,8 @@ html {
 
    .display-screen {
     width: 100%;
-    font-size: 2rem;
-    height: 30px;
+    font-size: 4rem;
+    height: 50px;
     border: solid, 1px navy;
     background-color:white;
     text-align: center;

@@ -4,7 +4,7 @@
     {{super()}}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/checkin.css') }}">  
 {% endblock %}
-
+{% block title %}Check In{% endblock %}
 {% block scripts %}
 	{{super()}}
 	<script src="{{ url_for('static', filename='js/checkin.js') }}">  </script>
@@ -20,7 +20,7 @@
     <h2>Name:</h2>
   </div>
   <div class="memberNameData">
-    <input type="text"id="memberName" class = "display-screen" value=" " disabled />
+    <input type="text"id="memberName" class = "display-screen" value=" " readonly />
   </div>
   <div class="inLabel">
     <h2 style="text-align: end">Check in time:</h2>
