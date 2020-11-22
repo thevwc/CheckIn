@@ -46,7 +46,7 @@ $(document).ready(function() {
         result = JSON.parse(this.responseText);
         // ID not found
         if (result.status == 'Not Found') {
-          msg = "The village ID '" + curNumber + "' was not found."
+          msg = "The Village's ID '" + curNumber + "' was not found."
           modalAlert("CHECK IN STATUS",msg)
           clearScreen()
           return
