@@ -141,14 +141,12 @@ def checkIn():
 
 def processCheckIn(villageID,typeOfWork,shopNumber):
     checkInDateTime = datetime.datetime.now()   #.strftime("%d/%m/%y %I:%M %p")
-    #sqlInsert = """INSERT INTO tblMember_Activity (Member_ID,Check_In_Date_Time,Type_Of_Work,Door_Used,Shop_Number) VALUES ('"""
-    #+ villageID + """', '""" + checkInDateTime + """', '""" + typeOfWork + """','FRONT', """ + str(shopNumber) + """)"""
-    #print (sqlInsert)   
+      
     try:
         activity = MemberActivity(Member_ID=villageID,Check_In_Date_Time=checkInDateTime,Type_Of_Work=typeOfWork,Shop_Number=int(shopNumber),Door_Used='Front')
         db.session.add(activity)
         db.session.commit()
-        flash("Check in added successfully.","success")
+        #flash("Check in added successfully.","success")
         return 
     except SQLAlchemyError as e:
         error = str(e.__dict__['orig'])
