@@ -11,35 +11,36 @@
 {% endblock %}
 
 {% block content %}
-<div class= "container hdg">
+<div class="parent">
+  <div class= "hdg">
     <h1>THE VILLAGES WOODWORKERS CLUB</h1>
-    <h6>ver. 11/22/2020</h6>
-</div>
+    <h5>ver. 11/22/2020</h5>
+  </div>  
+  <!-- ------------------------------------------------------------------------------- -->
+  <div class="nameDisplay">
+    <div>
+      <label for="memberName" style=margin-left:10px;margin-right:10px;>Name:</label>
+      <input type="text"id="memberName" style=size:30 value=" ">
+    </div>
+  </div>
+  <!-- ------------------------------------------------------------------------------- -->
 
-<div class = "wrapper">
-  <div class="memberName">
-    <h2>Name:</h2>
+  <div class="checkInTime">
+    <label for="checkInTime">Check in time:</label>
+    <input type="text" id="checkInTime" style = color:green;width:25%;text-align:center; value="">
+  </div>  
+  <!-- ------------------------------------------------------------------------------- -->
+  <div class="checkOutTime">
+    <label for="checkOutTime">Check out time:</label>
+    <input type="text"id="checkOutTime" style = color:red;width:25%;text-align:center; value="">
   </div>
-  <div class="memberNameData">
-    <input type="text"id="memberName" class = "display-screen" value=" " readonly />
-  </div>
-  <div class="inLabel">
-    <h2 style="text-align: end">Check in time:</h2>
-  </div>
-  <div class="inTime">
-    <input type="text" id="checkInTime" style = color:green class = "display-screen" value="" disabled />
-  </div>
-  <div class="outLabel">
-    <h2 style="text-align: end">Check out time:</h2>
-  </div>
-  <div class="outTime">
-    <input type="text"id="checkOutTime" style = color:red class = "display-screen" value="" disabled />
-  </div>
-</div>
-
-<div class = "container">
-  <div class="typeOfWork col-sm-6">
-    <input type="text" id=typeOfWork class="typeOfWork-screen" placeholder="General" value="General" disabled />
+  
+  <!-- ------------------------------------------------------------------------------- -->
+  
+  <div class="typeOfWork">
+    <div class="typeOfWorkSelected">
+      <input type="text" id=typeOfWork placeholder="General" value="General" disabled />
+    </div>
     <div class = "typeOfWork-keys">
       <button type="button" value="Admin">Admin</button>
       <button type="button" value="Carver">Carver</button>
@@ -54,16 +55,14 @@
       <button type="button" value="Turner">Turner</button>
     </div>
   </div>
-</div>
 
-
-<div class = "container">
-  <div class="calculator col-sm-6">
-    <p></p>
-    <div id="result">
-      <input  type="text" class="calculator-screen" id="memberInput" placeholder="" value="" disabled />
+    <!-- ---------------------------------------------------------------------------- -->
+   
+  <div class="keypad">
+    <div id="displayID">
+      <input  type="text" class="calculator-screen" maxlength='6' id="memberInput" placeholder="" value="">
     </div>
-
+  
     <div class="calculator-keys">
       
       <button id="calculatorKey" type="button" value="7">7</button>
@@ -82,29 +81,52 @@
       <button id="calculatorKey" type="button" value="0">0</button>
       <button id="calculatorKey" type="button" class="enter-key" value="enter">Enter</button>
   
-    </div>
-  </div>
-</div>
+    </div> <!-- END OF CALCULATOR-KEYS -->
+  </div>  <!-- END OF KEYPAD -->   
+</div> <!-- END OF PARENT -->
 
 
-    <!-- Modal -->
+
+    <!-- Modal for error messages. -->
 <div class="modal fade" id="myModalMsg" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalTitle">Modal title</h5>
+        <h5 class="modal-title" id="modalTitle"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" id=modalBody style=text-align:center>
-        ...
+       
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">CLOSE</button>
       </div>
     </div>
   </div>
-</div>  
 </div>
-      {% endblock %}
+
+<!-- Modal for note to member. -->
+<div class="modal fade" id="myModalNote" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalNoteTitle"></h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id=modalBody style=text-align:center>
+        <textarea name="note" id="noteID" cols="20" rows="10" class="note"></textarea>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" id="memberID" name="memberID">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="deleteNote()">DELETE NOTE</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">SAVE NOTE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

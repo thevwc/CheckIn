@@ -3,7 +3,7 @@
 from flask import render_template, flash, redirect, url_for, request, jsonify, json, make_response
 from flask_bootstrap import Bootstrap
 from werkzeug.urls import url_parse
-from app.models import ShopName, Member , MemberActivity
+from app.models import ShopName, Member , MemberActivity, NotesToMembers
 from app import app
 from app import db
 from sqlalchemy import func, case, desc, extract, select, update
@@ -13,6 +13,7 @@ from datetime import date
 
 @app.route('/')
 @app.route('/index')
+@app.route('/index/')
 def index():
     return render_template("checkin.html")
 
@@ -53,29 +54,35 @@ def checkIn():
     # Were any records found?
     if row == 0:
         response_body = {
-        "status" :"Not Found"
+        "status" :"Not Found",
+        "note" : "None"
         }
         res = make_response(jsonify(response_body),200)
         return(res)
         
     # Member record was found    
-    
+    # Is their a note for this member?
+    note = db.session.query(NotesToMembers.noteToMember).filter(NotesToMembers.memberID == villageID).first()
+    if note == None:
+        note="None"
+        
     # Is member restricted?
     if restricted:
         response_body = {
             "status": "Restricted",
             "memberName": memberName,
-            "reason": reasonRestricted
+            "reason": reasonRestricted,
+            "note": note
         }
         res = make_response(jsonify(response_body),200) 
         return(res)
-
 
     # Is member certified?
     if shopNumber == '1' and not certified1 and not volunteer:
         response_body = {
         "status" :"Not Certified",
-        "msg": "Not certified for ROLLING ACRES"
+        "msg": "Not certified for ROLLING ACRES",
+        "note":note
         }
         res = make_response(jsonify(response_body),200)
         return(res)
@@ -83,7 +90,8 @@ def checkIn():
     if shopNumber == '2' and not certified2 and not volunteer:
         response_body = {
         "status" :"Not Certified",
-        "msg": "Not certified for BROWNWOOD"
+        "msg": "Not certified for BROWNWOOD",
+        "note": note
         }
         res = make_response(jsonify(response_body),200)
         return(res)
@@ -116,7 +124,8 @@ def checkIn():
                 "status": "Check In",
                 "memberName": memberName,
                 "checkInTime":datetime.datetime.now().strftime('%I:%M %p'),
-                "typeOfWork": typeOfWorkToUse
+                "typeOfWork": typeOfWorkToUse,
+                "note": note
             }
             res = make_response(jsonify(response_body),200)
             return(res)
@@ -127,14 +136,16 @@ def checkIn():
                 "memberName": memberName,
                 "checkInTime": checkInTime.strftime('%I:%M %p'),
                 "checkOutTime":datetime.datetime.now().strftime('%I:%M %p'),
-                "typeOfWork": typeOfWorkAtCheckIn
+                "typeOfWork": typeOfWorkAtCheckIn,
+                "note": note
             }
             res = make_response(jsonify(response_body),200)
             return(res)
 
     # If no condition is met return the following -
     response_body = {
-        "status" :"Error"
+        "status" :"Error",
+        "note": note
     }
     res = make_response(jsonify(response_body),200)
     return(res)
@@ -147,11 +158,12 @@ def processCheckIn(villageID,typeOfWork,shopNumber):
         db.session.add(activity)
         db.session.commit()
         #flash("Check in added successfully.","success")
-        return 
+        return() 
     except SQLAlchemyError as e:
         error = str(e.__dict__['orig'])
         db.session.rollback()
         return 
+
     return
 
 def processCheckOut(recordID):
@@ -166,3 +178,34 @@ def processCheckOut(recordID):
         db.session.rollback()
         flash("Check out could not be completed.\n"+error,"danger")
         return
+
+@app.route("/deleteNote", methods=["GET","POST"])
+def deleteNote():
+    print('deleteNote')
+    if request.method != 'POST':
+        return
+    requestData = request.get_json()
+    villageID = requestData.get("memberID")
+    note = db.session.query(NotesToMembers).filter(NotesToMembers.memberID == villageID).one()
+    if note:
+        try:
+            db.session.delete(note)
+            db.session.commit()
+            response_body = {
+                "status" :"Success"
+            }
+            res = make_response(jsonify(response_body),200)
+            return(res)
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            response_body = {
+                "status" :"Error - note could not be deleted."
+            }
+            res = make_response(jsonify(response_body),200)
+            return(res)
+    else:
+        response_body = {
+            "status" :"No note to delete."
+            }
+        res = make_response(jsonify(response_body),200)
+        return(res)    

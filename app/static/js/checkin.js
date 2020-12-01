@@ -44,7 +44,10 @@ $(document).ready(function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
         // Get response from server
         result = JSON.parse(this.responseText);
+
+
         // ID not found
+        //alert('result.status - '+ result.status)
         if (result.status == 'Not Found') {
           msg = "The Village's ID '" + curNumber + "' was not found."
           modalAlert("CHECK IN STATUS",msg)
@@ -81,6 +84,14 @@ $(document).ready(function() {
           document.getElementById("typeOfWork").value = result.typeOfWork;
           document.getElementById("checkInTime").value = result.checkInTime;
           document.getElementById("checkOutTime").value = result.checkOutTime;
+          
+          // DISPLAY NOTE IF ONE EXISTS
+          if (result.note != 'None') {
+            document.getElementById("modalNoteTitle").innerHTML = 'Note to ' + result.memberName
+            document.getElementById("noteID").value = result.note
+            document.getElementById("memberID").value = curNumber
+            $('#myModalNote').modal('show')
+        }
           setTimeout(clearScreen,delayInMilliseconds)
           return
         }
@@ -90,6 +101,13 @@ $(document).ready(function() {
           document.getElementById("memberName").value = result.memberName;
           document.getElementById("typeOfWork").value = result.typeOfWork;
           document.getElementById("checkInTime").value = result.checkInTime;
+          // DISPLAY NOTE IF ONE EXISTS
+          if (result.note != 'None') {
+            document.getElementById("modalNoteTitle").innerHTML = 'Note to ' + result.memberName
+            document.getElementById("noteID").value = result.note
+            document.getElementById("memberID").value = curNumber
+            $('#myModalNote').modal('show')
+        }
           setTimeout(clearScreen,delayInMilliseconds)
           return
         }
@@ -131,9 +149,10 @@ $(document).ready(function() {
   }
 
   function modalAlert(title,msg) {
+    //alert("Title - " + title + '\n Message - '+msg)
     document.getElementById("modalTitle").innerHTML = title
     document.getElementById("modalBody").innerHTML= msg
-    $('#myModalMsg').modal()
+    $('#myModalMsg').modal('show')
   }
   //function setPause(){
   //  delayInSeconds = document.getElementById("setPause").value
@@ -142,3 +161,41 @@ $(document).ready(function() {
   //  alert(msg)
   //}
 })
+
+function deleteNote() {
+  villageID = document.getElementById('memberID').value
+  // Create an XHR object; set url
+  let xhr = new XMLHttpRequest();
+  let url = "/deleteNote";
+
+  // Open a connection
+  try {
+    xhr.open("POST", url, true);
+  }
+  catch {
+    alert("Open failed")
+    return;
+  }
+  // Set the request header, i.e., which type of content you are sending
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  // Send data to server
+  try {     
+    var data = JSON.stringify({"memberID":villageID});
+    xhr.send(data);
+  }
+  catch(err) {
+    alert("Send failed " + err);
+  }
+  // Create a state change callback
+  xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    // Get response from server
+    result = JSON.parse(this.responseText);
+    if (result.status != 'Success') {
+      alert("Note could not be deleted.")
+    }
+    return
+    }  
+  }
+}

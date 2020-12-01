@@ -70,4 +70,10 @@ class MemberActivity(db.Model):
     Shop_Number = db.Column(db.Integer)
     Door_Used = db.Column(db.String(5))
 	
+
+class NotesToMembers(db.Model):
+	__tablename__ = "notesToMembers"
+	__table_args__={"schema":"dbo"}
+	memberID = db.Column(db.String(6), primary_key=True)
+	noteToMember = db.Column(db.String(255))
 	
