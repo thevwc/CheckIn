@@ -26,6 +26,14 @@ def checkIn():
     requestData = request.get_json()
     villageID = requestData.get("memberID")
     typeOfWorkOverride = requestData.get("typeOfWork")
+    location = requestData.get("location")
+    if location == 'RA':
+        shopNumber = 1
+    else:
+        if location == 'BW':
+            shopNumber = 2
+        else:
+            shopNumber = 0
     
     # Look up member ID
     sqlSelect = """ SELECT Member_ID, First_Name, Last_Name, NonMember_Volunteer, Certified, Certified_2,Default_Type_Of_Work, Restricted_From_Shop, Reason_For_Restricted_From_Shop, noteToMember
@@ -99,9 +107,7 @@ def checkIn():
     # Member, or volunteer is not restricted so may be checked in/out
     if not restricted:
         # Retrieve today's check in record, if any, for this member
-        
         todaysDate = date.today()
-        print (todaysDate)
         sqlCheckInRecord = """SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, Type_Of_Work
             FROM tblMember_Activity 
             WHERE Member_ID = '""" + villageID + """' AND Check_Out_Date_Time Is Null 
@@ -116,7 +122,7 @@ def checkIn():
             typeOfWorkAtCheckIn = a.Type_Of_Work
             checkInTime = a.Check_In_Date_Time
             memberCheckedIn = True
-            print (a.Check_In_Date_Time, a.Check_Out_Date_Time)
+
         #Is member checked in?
         if not memberCheckedIn:
             processCheckIn(villageID,typeOfWorkToUse,shopNumber)
@@ -181,7 +187,6 @@ def processCheckOut(recordID):
 
 @app.route("/deleteNote", methods=["GET","POST"])
 def deleteNote():
-    print('deleteNote')
     if request.method != 'POST':
         return
     requestData = request.get_json()

@@ -13,15 +13,28 @@
 {% block content %}
 <div class="parent">
   <div class= "hdg">
-    <h1>THE VILLAGES WOODWORKERS CLUB</h1>
-    <h5>ver. 12/1/2020</h5>
+    <div class="title">
+      <div><span>THE VILLAGES WOODWORKERS CLUB</span></div>
+    </div>
+    
+    <div class="version">
+      ver. 12/2/2020
+    </div>  
+
+    <div class="settings">
+      <label>Location - </label> 
+      <select id="shopDefault" name="shopDefault">
+        <option id='selectAshop' disabled value="">Select a location ...</option>
+        <option id='shop1' value="RA">Rolling Acres</option>
+        <option id='shop2' value="BW">Brownwood</option>
+      </select>
+    </div>
+    
   </div>  
   <!-- ------------------------------------------------------------------------------- -->
   <div class="nameDisplay">
-    <div>
-      <label for="memberName" style=margin-left:10px;margin-right:10px;>Name:</label>
-      <input type="text"id="memberName" style=size:30 value=" ">
-    </div>
+    <label for="memberName" style=margin-left:10px;margin-right:10px;>Name:</label>
+    <input type="text"id="memberName" style=size:30 value=" ">
   </div>
   <!-- ------------------------------------------------------------------------------- -->
 
@@ -37,7 +50,7 @@
   
   <!-- ------------------------------------------------------------------------------- -->
   
-  <div class="typeOfWork">
+  <div id='typeOfWorkID' class="typeOfWork">
     <div class="typeOfWorkSelected">
       <input type="text" id=typeOfWork placeholder="General" value="General" disabled />
     </div>
@@ -58,28 +71,28 @@
 
     <!-- ---------------------------------------------------------------------------- -->
    
-  <div class="keypad">
+  <div id='keypadID' class="keypad">
     <div id="displayID">
-      <input  type="text" class="calculator-screen" maxlength='6' id="memberInput" placeholder="" value="">
+      <input id="memberInput" type="text" autofocus="autofocus" class="calculator-screen" maxlength='6' placeholder="" value="">
     </div>
   
     <div class="calculator-keys">
       
-      <button id="calculatorKey" type="button" value="7">7</button>
-      <button id="calculatorKey" type="button" value="8">8</button>
-      <button id="calculatorKey" type="button" value="9">9</button>
+      <button type="button" value="7">7</button>
+      <button type="button" value="8">8</button>
+      <button type="button" value="9">9</button>
   
-      <button id="calculatorKey" type="button" value="4">4</button>
-      <button id="calculatorKey" type="button" value="5">5</button>
-      <button id="calculatorKey" type="button" value="6">6</button>
+      <button type="button" value="4">4</button>
+      <button type="button" value="5">5</button>
+      <button type="button" value="6">6</button>
   
-      <button id="calculatorKey" type="button" value="1">1</button>
-      <button id="calculatorKey" type="button" value="2">2</button>
-      <button id="calculatorKey" type="button" value="3">3</button>
+      <button type="button" value="1">1</button>
+      <button type="button" value="2">2</button>
+      <button type="button" value="3">3</button>
   
-      <button id="calculatorKey" type="button" class="all-clear" value="all-clear">CLR</button>
-      <button id="calculatorKey" type="button" value="0">0</button>
-      <button id="calculatorKey" type="button" class="enter-key" value="enter">Enter</button>
+      <button type="button" class="all-clear" value="all-clear">CLR</button>
+      <button type="button" value="0">0</button>
+      <button id="enterKey" type="button" class="enter-key" value="enter">Enter</button>
   
     </div> <!-- END OF CALCULATOR-KEYS -->
   </div>  <!-- END OF KEYPAD -->   
@@ -128,5 +141,41 @@
     </div>
   </div>
 </div>
+
+ <!-- MODAL FORM FOR APPLICATION START UP SETTINGS -->
+ <div id="settingsModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <div class='modal-title'>  
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <br>
+                  <h4>The Villages Woodworkers Club</h4>
+              </div>
+          </div>
+          <div class="modal-body">
+              <h5 style="text-decoration: underline;text-align:center">CHECK-IN LOCATION</h5>
+              <form action="">
+                  <p style='text-align: left'>
+                      <label>Location - </label> 
+                      <select id="shopDefault" name="shopDefault" style="height: 25px;font-size: 1em;">
+                          <option id='selectAshop' value="">Select a location ...</option>
+                          <option id='shop1' value="RA">Rolling Acres</option>
+                          <option id='shop2' value="BW">Brownwood</option>
+                      </select>
+                  </p>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+          </div> 
+      </div>
+  </div>
+</div>
+
+
 
 {% endblock %}

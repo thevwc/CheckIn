@@ -3,13 +3,58 @@ $(document).ready(function() {
   var entry = "";
   var typeOfWork="General"
   var delayInMilliseconds = 5000
-  //var x = document.getElementById("setPause");
-  //x.addEventListener("change", setPause);
+
+  memberInput = document.getElementById('memberInput')
+  // SET UP LISTENER FOR BARCODE SCANNER INPUT
+  memberInput.addEventListener('input',checkForScannerInput)
   
+  // IF clientLocation IS NOT FOUND IN LOCAL STORAGE
+  // THEN PROMPT WITH MODAL FORM FOR LOCATION
+  currentLocation = localStorage.getItem('clientLocation')
+  switch(currentLocation){
+    case 'RA':
+      document.getElementById("shopDefault").selectedIndex = 1; //Option Rolling Acres
+      break;
+    case 'BW':
+      document.getElementById("shopDefault").selectedIndex = 2; //Option Rolling Acres
+      break;
+    default:
+      document.getElementById("shopDefault").selectedIndex = 0;
+      document.getElementById('typeOfWorkID').style.display='none';
+      document.getElementById('keypadID').style.display='none';
+      alert('Please select a location.')
+  }
+
+  document.getElementById('shopDefault').addEventListener('change',setClientLocation)
+
+  function setClientLocation() {
+    shopSelected = document.getElementById('shopDefault').value
+    switch(shopSelected){
+      case 'RA':
+        localStorage.setItem('clientLocation','RA');
+        currentLocation = 'RA'
+        break;
+      case 'BW':
+        localStorage.setItem('clientLocation','BW');
+        currentLocation = 'BW'
+        break;
+    }
+    document.getElementById('typeOfWorkID').style.display='block';
+    document.getElementById('keypadID').style.display='block';
+    document.getElementById('memberInput').focus();
+  }
+
+  // CHECK FOR SCANNED DATA IN memberInput ELEMENT
+  function checkForScannerInput() {
+    inputValue = memberInput.value
+    if (inputValue.length == 6) {
+      curNumber = inputValue
+      document.getElementById('enterKey').click()
+    }
+  }
 
   $("button").click(function() {    
     entry = $(this).attr("value");   
-     
     if (entry === "all-clear") {
       clearScreen();
       return;
@@ -33,7 +78,7 @@ $(document).ready(function() {
       
       // Send data to server
       try {     
-        var data = JSON.stringify({"memberID":curNumber, "typeOfWork":typeOfWork});
+        var data = JSON.stringify({"memberID":curNumber, "typeOfWork":typeOfWork,'location':currentLocation});
         xhr.send(data);
       }
       catch(err) {
@@ -47,7 +92,6 @@ $(document).ready(function() {
 
 
         // ID not found
-        //alert('result.status - '+ result.status)
         if (result.status == 'Not Found') {
           msg = "The Village's ID '" + curNumber + "' was not found."
           modalAlert("CHECK IN STATUS",msg)
@@ -128,7 +172,6 @@ $(document).ready(function() {
     
     
     // Is the data entered a member ID or a type of work label
-    // ... may have to check with ... if this.id == "typeOfWorkKey"{ 
     if (isNaN(entry)) {
       document.getElementById("typeOfWork").value = entry;
       typeOfWork = entry;
@@ -146,6 +189,7 @@ $(document).ready(function() {
     document.getElementById("memberInput").value = "";
     document.getElementById("checkInTime").value = "";
     document.getElementById("checkOutTime").value = "";
+    document.getElementById("memberInput").focus();
   }
 
   function modalAlert(title,msg) {
@@ -154,12 +198,7 @@ $(document).ready(function() {
     document.getElementById("modalBody").innerHTML= msg
     $('#myModalMsg').modal('show')
   }
-  //function setPause(){
-  //  delayInSeconds = document.getElementById("setPause").value
-  //  delayInMilliseconds = delayInSeconds * 1000
-  //  msg = "New delay of " + delayInSeconds + " seconds."
-  //  alert(msg)
-  //}
+ 
 })
 
 function deleteNote() {
