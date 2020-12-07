@@ -10,6 +10,7 @@ from sqlalchemy import func, case, desc, extract, select, update
 from sqlalchemy.exc import SQLAlchemyError 
 import datetime
 from datetime import date
+from pytz import timezone
 
 @app.route('/')
 @app.route('/index')
@@ -124,12 +125,13 @@ def checkIn():
             memberCheckedIn = True
 
         #Is member checked in?
+        est = timezone('EST')
         if not memberCheckedIn:
             processCheckIn(villageID,typeOfWorkToUse,shopNumber)
             response_body = {
                 "status": "Check In",
                 "memberName": memberName,
-                "checkInTime":datetime.datetime.now().strftime('%I:%M %p'),
+                "checkInTime":datetime.datetime.now(est).strftime('%I:%M %p'),
                 "typeOfWork": typeOfWorkToUse,
                 "note": note
             }
@@ -137,11 +139,12 @@ def checkIn():
             return(res)
         else:
             processCheckOut(recordID)
+            est = timezone('EST')
             response_body = {
                 "status": "Check Out",
                 "memberName": memberName,
                 "checkInTime": checkInTime.strftime('%I:%M %p'),
-                "checkOutTime":datetime.datetime.now().strftime('%I:%M %p'),
+                "checkOutTime":datetime.datetime.now(est).strftime('%I:%M %p'),
                 "typeOfWork": typeOfWorkAtCheckIn,
                 "note": note
             }
@@ -157,7 +160,8 @@ def checkIn():
     return(res)
 
 def processCheckIn(villageID,typeOfWork,shopNumber):
-    checkInDateTime = datetime.datetime.now()   #.strftime("%d/%m/%y %I:%M %p")
+    est = timezone('EST')
+    checkInDateTime = datetime.datetime.now(est)   #.strftime("%d/%m/%y %I:%M %p")
       
     try:
         activity = MemberActivity(Member_ID=villageID,Check_In_Date_Time=checkInDateTime,Type_Of_Work=typeOfWork,Shop_Number=int(shopNumber),Door_Used='Front')
@@ -173,7 +177,8 @@ def processCheckIn(villageID,typeOfWork,shopNumber):
     return
 
 def processCheckOut(recordID):
-    checkOutDateTime = datetime.datetime.now()
+    est = timezone('EST')
+    checkOutDateTime = datetime.datetime.now(est)
     try:
         activity = db.session.query(MemberActivity).filter(MemberActivity.ID == recordID).one()
         activity.Check_Out_Date_Time = checkOutDateTime
