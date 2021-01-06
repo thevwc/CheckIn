@@ -2,7 +2,16 @@ $(document).ready(function() {
   var curNumber="";
   var entry = "";
   var typeOfWork="General"
-  var delayInMilliseconds = 5000
+
+  if (!localStorage.getItem('delayMS')) {
+    localStorage.setItem('delayMS',5000)
+    delayInMilliseconds = 5000
+  }
+  else {
+    delayInMilliseconds = localStorage.getItem('delayMS')
+  }
+  console.log('delayInMilliseconds - '+delayInMilliseconds)
+  document.getElementById('delayMS').value = delayInMilliseconds
 
   memberInput = document.getElementById('memberInput')
   // SET UP LISTENER FOR BARCODE SCANNER INPUT
@@ -26,7 +35,13 @@ $(document).ready(function() {
   }
 
   document.getElementById('shopDefault').addEventListener('change',setClientLocation)
-  //document.getElementById('shopDefault').addEventListener('click',setClientLocation)
+  document.getElementById('delayMS').addEventListener('change',updateDelayMS)
+
+  function updateDelayMS() {
+    delayInMilliseconds = this.value
+    localStorage.setItem('delayMS',delayInMilliseconds)
+    document.getElementById('memberInput').focus()
+  }
 
   function setClientLocation() {
     shopSelected = document.getElementById('shopDefault').value
