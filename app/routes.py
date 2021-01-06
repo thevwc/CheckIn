@@ -20,13 +20,12 @@ def index():
 
 @app.route('/checkIn', methods=["GET","POST"])
 def checkIn():
-    shopNumber = "1"
-
     if request.method != 'POST':
         return
     requestData = request.get_json()
     villageID = requestData.get("memberID")
     typeOfWorkOverride = requestData.get("typeOfWork")
+    
     location = requestData.get("location")
     if location == 'RA':
         shopNumber = 1
@@ -48,7 +47,7 @@ def checkIn():
         villageID = m.Member_ID
         memberName = m.First_Name + " " + m.Last_Name
         typeOfWorkToUse = "General"
-        if (m.Default_Type_Of_Work != None):
+        if (m.Default_Type_Of_Work != None and m.Default_Type_Of_Work != ''):
             typeOfWorkToUse = m.Default_Type_Of_Work
         
         if (typeOfWorkOverride != "General"):
@@ -109,11 +108,18 @@ def checkIn():
     if not restricted:
         # Retrieve today's check in record, if any, for this member
         todaysDate = date.today()
-        sqlCheckInRecord = """SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, Type_Of_Work
-            FROM tblMember_Activity 
-            WHERE Member_ID = '""" + villageID + """' AND Check_Out_Date_Time Is Null 
-            and Format(Check_In_Date_Time,'yyyy-MM-dd') = '""" + str(todaysDate) + """'"""
-            
+        # sqlCheckInRecord = """SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, Type_Of_Work
+        #     FROM tblMember_Activity 
+        #     WHERE Member_ID = '""" + villageID + """' AND Check_Out_Date_Time Is Null 
+        #     and Format(Check_In_Date_Time,'yyyy-MM-dd') = '""" + str(todaysDate) + """'"""
+        sqlCheckInRecord = "SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, "
+        sqlCheckInRecord += "Type_Of_Work, Shop_Number "
+        sqlCheckInRecord += "FROM tblMember_Activity "
+        sqlCheckInRecord += "WHERE Member_ID = '" + villageID + "' "
+        sqlCheckInRecord += "AND Check_Out_Date_Time Is Null "
+        sqlCheckInRecord += "AND Format(Check_In_Date_Time,'yyyy-MM-dd') = '" + str(todaysDate) + "' "
+        sqlCheckInRecord += "AND Shop_Number = '" + str(shopNumber) + "'"
+       
        # Look for current checkin in the table tblMember_Activity
         memberCheckedIn = False 
         typeOfWorkAtCheckIn=""
@@ -161,13 +167,12 @@ def checkIn():
 
 def processCheckIn(villageID,typeOfWork,shopNumber):
     est = timezone('EST')
-    checkInDateTime = datetime.datetime.now(est)   #.strftime("%d/%m/%y %I:%M %p")
+    checkInDateTime = datetime.datetime.now(est)
       
     try:
         activity = MemberActivity(Member_ID=villageID,Check_In_Date_Time=checkInDateTime,Type_Of_Work=typeOfWork,Shop_Number=int(shopNumber),Door_Used='Front')
         db.session.add(activity)
         db.session.commit()
-        #flash("Check in added successfully.","success")
         return() 
     except SQLAlchemyError as e:
         error = str(e.__dict__['orig'])

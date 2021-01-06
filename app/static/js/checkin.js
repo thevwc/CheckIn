@@ -26,6 +26,7 @@ $(document).ready(function() {
   }
 
   document.getElementById('shopDefault').addEventListener('change',setClientLocation)
+  //document.getElementById('shopDefault').addEventListener('click',setClientLocation)
 
   function setClientLocation() {
     shopSelected = document.getElementById('shopDefault').value
@@ -77,7 +78,10 @@ $(document).ready(function() {
        xhr.setRequestHeader("Content-Type", "application/json");
       
       // Send data to server
-      try {     
+      try { 
+        if (typeOfWork == null | typeOfWork == ''){
+          typeOfWork = 'General'
+        }    
         var data = JSON.stringify({"memberID":curNumber, "typeOfWork":typeOfWork,'location':currentLocation});
         xhr.send(data);
       }
@@ -93,7 +97,7 @@ $(document).ready(function() {
 
         // ID not found
         if (result.status == 'Not Found') {
-          msg = "The Village's ID '" + curNumber + "' was not found."
+          msg = "The Villages ID '" + curNumber + "' was not found."
           modalAlert("CHECK IN STATUS",msg)
           clearScreen()
           return
@@ -175,11 +179,13 @@ $(document).ready(function() {
     if (isNaN(entry)) {
       document.getElementById("typeOfWork").value = entry;
       typeOfWork = entry;
+      //document.getElementById('memberInput').focus()
     }
     else {
       curNumber = curNumber + entry;
       document.getElementById("memberInput").value = curNumber;
     }
+    document.getElementById('memberInput').focus()
   })
   function clearScreen() {
     entry='';
@@ -200,6 +206,16 @@ $(document).ready(function() {
   }
  
 })
+function closeModal() {
+  $('#myModalMsg').modal('hide')
+  document.getElementById('memberInput').focus()
+
+}
+
+function closeNote() {
+  //$('#myModalNote').modal('hide')
+  document.getElementById('memberInput').focus()
+}
 
 function deleteNote() {
   villageID = document.getElementById('memberID').value
@@ -222,6 +238,7 @@ function deleteNote() {
   try {     
     var data = JSON.stringify({"memberID":villageID});
     xhr.send(data);
+
   }
   catch(err) {
     alert("Send failed " + err);
@@ -234,6 +251,7 @@ function deleteNote() {
     if (result.status != 'Success') {
       alert("Note could not be deleted.")
     }
+    document.getElementById('memberInput').focus()
     return
     }  
   }

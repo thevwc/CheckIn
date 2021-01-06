@@ -18,12 +18,12 @@
     </div>
     
     <div class="version">
-      ver. Dec 7, 2020
+      ver. Jan 6, 2021
     </div>  
 
     <div class="settings">
       <label>Location - </label> 
-      <select id="shopDefault" name="shopDefault">
+      <select id="shopDefault" name="shopDefault" style=font-size:1.25rem>
         <option id='selectAshop' disabled value="">Select a location ...</option>
         <option id='shop1' value="RA">Rolling Acres</option>
         <option id='shop2' value="BW">Brownwood</option>
@@ -55,7 +55,7 @@
       <input type="text" id=typeOfWork placeholder="General" value="General" disabled />
     </div>
     <div class = "typeOfWork-keys">
-      <button type="button" value="Admin">Admin</button>
+      <button type="button" value="Administrative">Administrative</button>
       <button type="button" value="Carver">Carver</button>
       <button type="button" value="Education">Education</button>
       <button type="button" value="General">General</button>
@@ -78,23 +78,23 @@
   
     <div class="calculator-keys">
       
-      <button type="button" value="7">7</button>
-      <button type="button" value="8">8</button>
-      <button type="button" value="9">9</button>
+      <button type="button" value="1">1</button>
+      <button type="button" value="2">2</button>
+      <button type="button" value="3">3</button>
   
       <button type="button" value="4">4</button>
       <button type="button" value="5">5</button>
       <button type="button" value="6">6</button>
   
-      <button type="button" value="1">1</button>
-      <button type="button" value="2">2</button>
-      <button type="button" value="3">3</button>
+      <button type="button" value="7">7</button>
+      <button type="button" value="8">8</button>
+      <button type="button" value="9">9</button>
   
       <button type="button" class="all-clear" value="all-clear">CLR</button>
       <button type="button" value="0">0</button>
       <button id="enterKey" type="button" class="enter-key" value="enter">Enter</button>
   
-    </div> <!-- END OF CALCULATOR-KEYS -->
+    </div> <!-- END OF calculator-KEYS -->
   </div>  <!-- END OF KEYPAD -->   
 </div> <!-- END OF PARENT -->
 
@@ -106,7 +106,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalTitle"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" onclick=closeModal() aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -114,7 +114,7 @@
        
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">CLOSE</button>
+        <button type="button" class="btn btn-primary" onclick=closeModal() data-dismiss="modal">CLOSE</button>
       </div>
     </div>
   </div>
@@ -136,7 +136,7 @@
       <div class="modal-footer">
         <input type="hidden" id="memberID" name="memberID">
         <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="deleteNote()">DELETE NOTE</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">SAVE NOTE</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeNote()">SAVE NOTE</button>
       </div>
     </div>
   </div>

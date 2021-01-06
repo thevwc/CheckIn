@@ -251,9 +251,15 @@ button:hover {
  @media (min-width: 768px) {
 .parent {
   display:grid;
-  grid-template-rows:1fr 1fr 1fr 1fr;
+  grid-template-rows:50px 50px 50px 25px 1fr 100px;
   grid-template-columns: 1fr 1fr;
-  background-color: lightgreen;
+  grid-template-areas:  "hdgArea      hdgArea"
+                      "nameArea       checkInArea"
+                      "nameArea       checkOutArea"
+                      ".  ."
+                      "typeOfWorkArea keypadArea"
+                      "footerArea     footerArea";
+  background-color: navy;
 }
  } 
 /* -------------------------------------------------------------------------------------- */
