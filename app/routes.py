@@ -25,7 +25,8 @@ def checkIn():
     requestData = request.get_json()
     villageID = requestData.get("memberID")
     typeOfWorkOverride = requestData.get("typeOfWork")
-    
+    print('typeOfWorkOverride - ',typeOfWorkOverride)
+
     location = requestData.get("location")
     if location == 'RA':
         shopNumber = 1
@@ -52,6 +53,7 @@ def checkIn():
         
         if (typeOfWorkOverride != "General"):
             typeOfWorkToUse = typeOfWorkOverride
+        print('typeOfWorkToUse - ',typeOfWorkToUse)
 
         certified1 = m.Certified
         certified2 = m.Certified_2
@@ -128,6 +130,7 @@ def checkIn():
             recordID = a.ID
             typeOfWorkAtCheckIn = a.Type_Of_Work
             checkInTime = a.Check_In_Date_Time
+            checkInLocation = a.Shop_Number
             memberCheckedIn = True
 
         #Is member checked in?
@@ -144,6 +147,8 @@ def checkIn():
             res = make_response(jsonify(response_body),200)
             return(res)
         else:
+            # IS MEMBER CHECKED INTO THIS SHOP?
+            #if checkInLocation != shopNumber :
             processCheckOut(recordID)
             est = timezone('EST')
             response_body = {

@@ -1,64 +1,97 @@
-$(document).ready(function() {
+// $(document).ready(function() {
   var curNumber="";
   var entry = "";
   var typeOfWork="General"
 
-  if (!localStorage.getItem('delayMS')) {
-    localStorage.setItem('delayMS',5000)
-    delayInMilliseconds = 5000
+  // isDBA = false
+  // isMgr = false
+  // if (!localStorage.getItem('isDBA'))
+
+  // isDBA = localStorage.getItem('isDBA')
+  // isMgr = localStorage.getItem('isMgr')
+
+
+  if (!localStorage.getItem('delaySec')) {
+    localStorage.setItem('delaySec',5)
+    delayInSeconds = 5
   }
   else {
-    delayInMilliseconds = localStorage.getItem('delayMS')
+    delayInSeconds = localStorage.getItem('delaySec')
   }
+  delayInMilliseconds = delayInSeconds * 1000
   console.log('delayInMilliseconds - '+delayInMilliseconds)
-  document.getElementById('delayMS').value = delayInMilliseconds
+  document.getElementById('delaySec').innerHTML = delayInSeconds + ' sec'
+  document.getElementById('delayTimeID').value = delayInSeconds
 
-  memberInput = document.getElementById('memberInput')
+  
   // SET UP LISTENER FOR BARCODE SCANNER INPUT
+  memberInput = document.getElementById('memberInput')
   memberInput.addEventListener('input',checkForScannerInput)
   
+  // SET UP LISTENERS FOR SETTINGS BUTTONS
+  $(".cancelBtn").click(function() {
+    $('#settingsModalID').modal('hide')
+  })
+
+  // $("#settingsForm").submit(function(event){
+  //   console.log('jquery from submit')
+	// 	  updateSettings(event);
+	// 	return false;
+  // });
+  
+  function updateSettings(settingsForm) {
+    console.log('delayTimeID - ' + $("#delayTimeID").val())
+    console.log('updateSettings')
+    delayInSeconds = settingsForm.delayTime.value
+    localStorage.setItem('delaySec',delayInSeconds)
+    delayInMilliseconds = delayInSeconds * 1000
+    console.log('delayInSeconds - ',delayInSeconds)
+
+    currentLocation = settingsForm.locationOption.value
+    localStorage.setItem('clientLocation',currentLocation)
+    if (currentLocation == 'RA') {
+      document.getElementById("locationID").innerHTML = 'Rolling Acres'
+    }
+    if (currentLocation == 'BW') {
+      document.getElementById("locationID").innerHTML = 'Brownwood'
+    } 
+    console.log('currentLocation - ',currentLocation)    
+  }
+
+  
   // IF clientLocation IS NOT FOUND IN LOCAL STORAGE
-  // THEN PROMPT WITH MODAL FORM FOR LOCATION
+  // THEN ASSUME ROLLING ACRES
   currentLocation = localStorage.getItem('clientLocation')
   switch(currentLocation){
     case 'RA':
-      document.getElementById("shopDefault").selectedIndex = 1; //Option Rolling Acres
+      document.getElementById("locationID").innerHTML = 'Rolling Acres'
+      document.getElementById("locationOptionRA").setAttribute('checked',true)
+      document.getElementById("locationOptionBW").removeAttribute('checked')
       break;
     case 'BW':
-      document.getElementById("shopDefault").selectedIndex = 2; //Option Rolling Acres
+      document.getElementById("locationID").innerHTML = 'Brownwood'
+      document.getElementById("locationOptionBW").setAttribute('checked',true)
+      document.getElementById("locationOptionRA").removeAttribute('checked')
       break;
     default:
-      document.getElementById("shopDefault").selectedIndex = 0;
-      document.getElementById('typeOfWorkID').style.display='none';
-      document.getElementById('keypadID').style.display='none';
-      alert('Please select a location.')
+      document.getElementById("locationID").innerHTML = 'Rolling Acres'
+      localStorage.setItem('clientLocation','RA')
+      document.getElementById("locationID").innerHTML = 'Rolling Acres'
+      document.getElementById("locationOptionRA").setAttribute('checked',true)
+      document.getElementById("locationOptionBW").removeAttribute('checked')
+      currentLocation = 'RA'
+      
+  }
+  // change the following to a modal dialog with Yes and No
+  if (!confirm("Is the location at the top of the screen ok?")){
+    alert('Enter the code to change the location.')
   }
 
-  document.getElementById('shopDefault').addEventListener('change',setClientLocation)
-  document.getElementById('delayMS').addEventListener('change',updateDelayMS)
+  // SHOW TYPE OF WORK AND KEYPAD AREAS OF SCREEN
+  document.getElementById('typeOfWorkID').style.display='block';
+  document.getElementById('keypadID').style.display='block';
+  document.getElementById('memberInput').focus();
 
-  function updateDelayMS() {
-    delayInMilliseconds = this.value
-    localStorage.setItem('delayMS',delayInMilliseconds)
-    document.getElementById('memberInput').focus()
-  }
-
-  function setClientLocation() {
-    shopSelected = document.getElementById('shopDefault').value
-    switch(shopSelected){
-      case 'RA':
-        localStorage.setItem('clientLocation','RA');
-        currentLocation = 'RA'
-        break;
-      case 'BW':
-        localStorage.setItem('clientLocation','BW');
-        currentLocation = 'BW'
-        break;
-    }
-    document.getElementById('typeOfWorkID').style.display='block';
-    document.getElementById('keypadID').style.display='block';
-    document.getElementById('memberInput').focus();
-  }
 
   // CHECK FOR SCANNED DATA IN memberInput ELEMENT
   function checkForScannerInput() {
@@ -70,13 +103,24 @@ $(document).ready(function() {
   }
 
   $("button").click(function() {    
-    entry = $(this).attr("value");   
+    entry = $(this).attr("value");
+    
+    console.log('typeOfWork at button click - '+typeOfWork)
+    
+    // WAS CLR KEY PRESSED?
     if (entry === "all-clear") {
       clearScreen();
       return;
     }
 
     if (entry === "enter") {
+      // TEST FOR 999999 INTERRUPT FOR CHANGE OF LOCATION OR TIME DELAY
+      if (curNumber == '999999') {
+        
+        $('#settingsModalID').modal('show')
+        clearScreen()
+        return
+      }
       // Create an XHR object; set url
       let xhr = new XMLHttpRequest();
       let url = "/checkIn";
@@ -162,6 +206,9 @@ $(document).ready(function() {
         // New check in
         if (result.status == 'Check In') {
           document.getElementById("memberName").value = result.memberName;
+          
+          console.log('result.typeOfWork - '+result.typeOfWork)
+
           document.getElementById("typeOfWork").value = result.typeOfWork;
           document.getElementById("checkInTime").value = result.checkInTime;
           // DISPLAY NOTE IF ONE EXISTS
@@ -192,21 +239,35 @@ $(document).ready(function() {
     
     // Is the data entered a member ID or a type of work label
     if (isNaN(entry)) {
-      document.getElementById("typeOfWork").value = entry;
-      typeOfWork = entry;
-      //document.getElementById('memberInput').focus()
+      if (typeof(entry) != "undefined" & entry != "all-clear" & entry != "enter") {
+        document.getElementById("typeOfWork").value = entry;
+        typeOfWork = entry;
+      }
+      else {
+        typeOfWork = 'General'
+        document.getElementById("typeOfWork").value = 'General'
+      }
     }
     else {
       curNumber = curNumber + entry;
       document.getElementById("memberInput").value = curNumber;
+      console.log(curNumber)
+
+      // IF 6 DIGITS HAVE BEEN ENTERED, CLICK THE ENTER KEY
+      if (curNumber.length == 6) {
+        document.getElementById('enterKey').click()
+      }
     }
     document.getElementById('memberInput').focus()
   })
+
+
   function clearScreen() {
     entry='';
     curNumber="";
     document.getElementById("memberName").value = "";
     document.getElementById("typeOfWork").value = "General";
+    typeOfWork = 'General'
     document.getElementById("memberInput").value = "";
     document.getElementById("checkInTime").value = "";
     document.getElementById("checkOutTime").value = "";
@@ -220,10 +281,15 @@ $(document).ready(function() {
     $('#myModalMsg').modal('show')
   }
  
-})
+
 function closeModal() {
   $('#myModalMsg').modal('hide')
-  document.getElementById('memberInput').focus()
+  console.log('before call to clearScreen')
+  console.log('typeOfWork - '+typeOfWork)
+  //clearScreen()
+  
+  console.log('after call to clearScreen')
+  //document.getElementById('memberInput').focus()
 
 }
 

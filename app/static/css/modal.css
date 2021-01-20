@@ -1,0 +1,154 @@
+
+/* MODAL FORM FOR SHOWING TODAYS MONITORS */
+#modal {
+  display:block;
+  width:50%;
+  color:blue;
+}
+.modal-content {
+  background-color:beige;
+  color:navy;
+  height:max-content;
+  font-size:.75rem;
+}
+.modal-header {
+  background-color: navy;
+  color:white;
+}
+.modal-header button {
+  float: right;
+  }
+.modal-body {
+  width:100%;
+  background-color: white;
+  color:maroon;
+}
+.modal-xl {
+  width: 95%;
+  max-width:1200px;
+}
+.modal-title {
+  width:100%;
+  text-align:center;
+  }
+.modal-body form {
+  text-align: center;
+  margin:0 auto;
+}
+ 
+.locationOptions {
+  width:400px;
+  height:150px;
+  padding-left:0em;
+  background-color: lightgray;
+  border:1px solid navy;
+  padding-left:3em;
+}
+.form-check-input {
+  margin-top:.7rem;
+}
+input[type='radio']:after {
+	width: 15px;
+	height: 15px;
+	border-radius: 15px;
+	top: 0px;
+	left: -1px;
+	position: relative;
+	background-color: #d1d3d1;
+	content: '';
+	display: inline-block;
+	visibility: visible;
+	border: 2px solid white;
+}
+	
+input[type='radio']:checked:after {
+	width: 15px;
+	height: 15px;
+	border-radius: 15px;
+	top: -2px;
+	left: -1px;
+	position: relative;
+	background-color: #ffa500;
+	content: '';
+	display: inline-block;
+	visibility: visible;
+	border: 2px solid white;
+}
+
+
+
+
+.modal-footer {
+  height:50px;
+  margin:0px;
+  padding-top:0px;
+  padding-bottom:0px;
+  background-color: gray;
+  }
+.footer-left-col {
+  width:100%;
+  text-align: right;
+  padding-top:0em;
+}
+.footer-right-col {
+  width:80%;
+  text-align: left;
+  padding-top:0em;
+}
+.footer-left-col button {
+  width:200px; 
+  height:30px;
+  font-size: 1rem;
+  text-align:center;
+  padding-right:0em;
+}
+.footer-right-col button {
+  width:200px;
+  height:30px; 
+  font-size: 1rem;
+  text-align:center;
+  padding-left:0em;
+  color:white;
+}
+/* button:disabled {
+  color:gray !important;
+} */
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 42px;
+  font-weight: bold;
+  }
+.close:hover,
+.close:focus {
+  color:white;
+  text-decoration: none;
+  cursor: pointer;
+  }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  /* .tooltip .tooltiptext { */
+  .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+  
