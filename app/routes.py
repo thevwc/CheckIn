@@ -25,7 +25,6 @@ def checkIn():
     requestData = request.get_json()
     villageID = requestData.get("memberID")
     typeOfWorkOverride = requestData.get("typeOfWork")
-    print('typeOfWorkOverride - ',typeOfWorkOverride)
 
     location = requestData.get("location")
     if location == 'RA':
@@ -40,7 +39,6 @@ def checkIn():
     sqlSelect = """ SELECT Member_ID, First_Name, Last_Name, NonMember_Volunteer, Certified, Certified_2,Default_Type_Of_Work, Restricted_From_Shop, Reason_For_Restricted_From_Shop, noteToMember
         FROM tblMember_Data LEFT JOIN notesToMembers ON tblMember_Data.Member_ID = notesToMembers.memberID
         WHERE tblMember_Data.Member_ID='""" + villageID + """'"""
-    
     member = db.engine.execute(sqlSelect)
     row = 0
     for m in member:
@@ -53,7 +51,6 @@ def checkIn():
         
         if (typeOfWorkOverride != "General"):
             typeOfWorkToUse = typeOfWorkOverride
-        print('typeOfWorkToUse - ',typeOfWorkToUse)
 
         certified1 = m.Certified
         certified2 = m.Certified_2
@@ -70,7 +67,7 @@ def checkIn():
         res = make_response(jsonify(response_body),200)
         return(res)
         
-    # Member record was found    
+    # Member record was found  
     # Is their a note for this member?
     note = db.session.query(NotesToMembers.noteToMember).filter(NotesToMembers.memberID == villageID).first()
     if note == None:
@@ -110,10 +107,7 @@ def checkIn():
     if not restricted:
         # Retrieve today's check in record, if any, for this member
         todaysDate = date.today()
-        # sqlCheckInRecord = """SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, Type_Of_Work
-        #     FROM tblMember_Activity 
-        #     WHERE Member_ID = '""" + villageID + """' AND Check_Out_Date_Time Is Null 
-        #     and Format(Check_In_Date_Time,'yyyy-MM-dd') = '""" + str(todaysDate) + """'"""
+        
         sqlCheckInRecord = "SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, "
         sqlCheckInRecord += "Type_Of_Work, Shop_Number "
         sqlCheckInRecord += "FROM tblMember_Activity "

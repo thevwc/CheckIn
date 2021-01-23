@@ -35,19 +35,25 @@
   text-align: center;
   margin:0 auto;
 }
- 
+#locationOptions {
+  padding-left:3rem;
+}
 .locationOptions {
   width:400px;
   height:150px;
   padding-left:0em;
   background-color: lightgray;
   border:1px solid navy;
-  padding-left:3em;
+  padding-left:2em;
+}
+.form-check-label {
+  padding-left:2rem;
 }
 .form-check-input {
   margin-top:.7rem;
+  margin-left:0rem;
 }
-input[type='radio']:after {
+  input[type='radio']:after {
 	width: 15px;
 	height: 15px;
 	border-radius: 15px;
@@ -58,7 +64,7 @@ input[type='radio']:after {
 	content: '';
 	display: inline-block;
 	visibility: visible;
-	border: 2px solid white;
+  border: 2px solid white;
 }
 	
 input[type='radio']:checked:after {
@@ -72,11 +78,8 @@ input[type='radio']:checked:after {
 	content: '';
 	display: inline-block;
 	visibility: visible;
-	border: 2px solid white;
-}
-
-
-
+  border: 2px solid white;
+} 
 
 .modal-footer {
   height:50px;
@@ -127,28 +130,44 @@ input[type='radio']:checked:after {
   cursor: pointer;
   }
 
-  .tooltip {
+  /* .tooltip {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
-  }
+  } */
   
   /* .tooltip .tooltiptext { */
-  .tooltiptext {
+  /* .tooltiptext {
     visibility: hidden;
     width: 120px;
     background-color: black;
     color: #fff;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 0;
+    padding: 5px 0; */
   
     /* Position the tooltip */
-    position: absolute;
+    /* position: absolute;
     z-index: 1;
-  }
+  } */
   
-  .tooltip:hover .tooltiptext {
+  /* .tooltip:hover .tooltiptext {
     visibility: visible;
+  } */
+  /* #settingsModalID {
+    width:30%;
+    vertical-align: middle;
+  } */
+  /* #settingsForm {
+    width:80%;
+  } */
+  /* .locationOptions {
+    padding-right:5rem;
+  }  */
+  #cancelBtn {
+    width:100px;
+  }
+  #saveBtn {
+    width:100px;
   }
   

@@ -306,6 +306,7 @@ button:hover {
   grid-area:titleArea;
   font-size:1.5rem;
   align-items:center;
+  padding-top:.5em;
 }
 .settings {
   grid-area:settingsArea;

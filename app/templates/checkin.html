@@ -19,7 +19,7 @@
     </div>
     
     <div class="version">
-      ver. Jan 20, 2021
+      ver. Jan 23, 2021
       <!-- <input type="text" id="delaySec" readonly style=text-align:center;margin-left:20px;width:60px > -->
       <label id="delaySec"
         style='text-align:center;margin-left:35px;margin-top:5px;width:60px;height:35px;border:1px solid white;color:white;padding-top:0px' >
@@ -134,53 +134,16 @@
       </div>
       <div class="modal-footer">
         <input type="hidden" id="memberID" name="memberID">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="deleteNote()">DELETE NOTE</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeNote()">SAVE NOTE</button>
+        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" style=height:30px onclick="deleteNote()">DELETE NOTE</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" style=height:30px  onclick="closeNote()">SAVE NOTE</button>
       </div>
     </div>
   </div>
 </div>
 
- <!-- MODAL FORM FOR APPLICATION START UP SETTINGS -->
- <!-- <div id="settingsModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <div class='modal-closeSymbol row'>  
-                  <button type="button" class="close" style=text-align:right data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-
-              <div class='modal-title row' style=text-align:center>  
-                  <h3>The Villages Woodworkers Club</h3>
-              </div>
-          </div>
-          <div class="modal-body">
-              <h5 style="text-decoration: underline;text-align:center">CHECK-IN LOCATION</h5>
-              <form action="">
-                  <div style='text-align: left;'>
-                    <select id="shopDefault" name="shopDefault" style="height: 60px;width:200px;font-size: .75em;">
-                      <option id='selectAshop' value="">Select a location ...</option>
-                      <option id='shop1' value="RA">Rolling Acres</option>
-                      <option id='shop2' value="BW">Brownwood</option>
-                    </select>
-                  </div>
-              </form>
-              <div class=row style=font-size:1rem>
-                <label for="setDelayID">Set delay in seconds -</label>
-                <input type="number" id="setDelayID" style=width:50px;font-size:1.5rem min=1 max=5>
-              </div>
-              
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
-          </div> 
-      </div>
-  </div>
-</div> -->
+ <!-- MODAL FOR SETTING CLIENT LOCATION AND/OR DELAY TIME IN SECONDS-->
 <div id="settingsModalID" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-md" role="document">
     <form id='settingsForm' action="#" name='settingsForm' onsubmit="updateSettings(this);">
       <div class="modal-content">
         <div class="modal-header">
@@ -191,8 +154,8 @@
             </button>
         </div>
         <div class="modal-body">
-          <div id='locationOptions row'> 
-            <div class="locationOptions btn-group-vertical">
+          <div id='locationOptions'> 
+            <div class="locationOptions row btn-group-vertical">
               <label for="">Select one of the following -</label>
               <div class="form-check">
                   <input class="form-check-input" type="radio" name="locationOption" id="locationOptionRA" value="RA">
@@ -210,14 +173,15 @@
           </div>  
 
           <div class='setDelayTime row'>
-            <label for="delayTimeID" >Set screen delay time in seconds -</label>
-            <input type="number" id="delayTimeID" name='delayTime' style=width:50px; min=1 max=5>
+            <label for="delayTimeID" style=margin-left:5rem>Set screen delay time in seconds -</label>
+            <input type="number" id="delayTimeID" name='delayTime'
+              style="border:1px solid black; color:blue;width:50px;text-align:center;" min=1 max=5>
           </div>     
         </div>
 
         <div class="modal-footer">
             <div class='col-6 footer-left-col'>
-                <button id='cancelBtn' type='button' class='btn-secondary '>Cancel</button>   
+                <button id='cancelBtn' type='button' class='btn-secondary 'onclick='cancelSettings()'>Cancel</button>   
             </div> 
             <div class='col-6 footer-right-col'> 
                 <button id='saveBtn' type="submit" class="btn-primary">Save</button>
