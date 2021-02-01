@@ -1,4 +1,3 @@
-
 /* MODAL FORM FOR SHOWING TODAYS MONITORS */
 #modal {
   display:block;
@@ -12,6 +11,7 @@
   font-size:.75rem;
 }
 .modal-header {
+  height:75px;
   background-color: navy;
   color:white;
 }
@@ -113,9 +113,7 @@ input[type='radio']:checked:after {
   padding-left:0em;
   color:white;
 }
-/* button:disabled {
-  color:gray !important;
-} */
+
 /* The Close Button */
 .close {
   color: white;
@@ -129,41 +127,6 @@ input[type='radio']:checked:after {
   text-decoration: none;
   cursor: pointer;
   }
-
-  /* .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-  } */
-  
-  /* .tooltip .tooltiptext { */
-  /* .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0; */
-  
-    /* Position the tooltip */
-    /* position: absolute;
-    z-index: 1;
-  } */
-  
-  /* .tooltip:hover .tooltiptext {
-    visibility: visible;
-  } */
-  /* #settingsModalID {
-    width:30%;
-    vertical-align: middle;
-  } */
-  /* #settingsForm {
-    width:80%;
-  } */
-  /* .locationOptions {
-    padding-right:5rem;
-  }  */
   #cancelBtn {
     width:100px;
   }

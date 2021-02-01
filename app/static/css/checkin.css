@@ -176,7 +176,9 @@ button:hover {
   background-color: gray;
   color:blue !important;
 }
-
+button:disabled {
+  background-color:gray;
+}
 .operator {
   color: #337cac;
 }

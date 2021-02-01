@@ -1,8 +1,7 @@
-// $(document).ready(function() {
   var curNumber="";
   var entry = "";
   var typeOfWork="General"
-
+  
   // isDBA = false
   // isMgr = false
   // if (!localStorage.getItem('isDBA'))
@@ -78,10 +77,10 @@
       currentLocation = 'RA'
       
   }
-  // change the following to a modal dialog with Yes and No
-  if (!confirm("Is the location at the top of the screen ok?")){
-    alert('Enter the code to change the location.')
-  }
+  // PROMPT USER TO CHECK THE LOCATION
+  msg='Please check the location at the top of the screen.'
+  modalConfirm("LOCATION",msg,'Ok','Change')
+  
 
   // SHOW TYPE OF WORK AND KEYPAD AREAS OF SCREEN
   document.getElementById('typeOfWorkID').style.display='block';
@@ -146,7 +145,6 @@
           processCheckIn()
         }
         
-        // document.getElementById('enterKey').click()
       }
     }
     document.getElementById('memberInput').focus()
@@ -290,6 +288,25 @@ function processCheckIn() {
 function closeModal() {
   $('#myModalMsg').modal('hide')
     document.getElementById('memberInput').focus()
+}
+
+function modalConfirm(title,msg,Btn1,Btn2) {
+  console.log('title - '+title)
+  console.log('msg - '+msg)
+  console.log('Btn1 - '+Btn1)
+  console.log('Btn2 - '+Btn2)
+  document.getElementById("modalConfirmTitle").innerHTML = title
+  document.getElementById("modalConfirmBody").innerHTML= msg
+  document.getElementById("modalConfirmBtn1").innerHTML= Btn1
+  document.getElementById("modalConfirmBtn2").innerHTML= Btn2
+  $('#myModalConfirm').modal('show')
+}
+function closeConfirmModalBtn1() {
+  $('#myModalConfirm').modal('hide')
+}
+function closeConfirmModalBtn2() {
+  $('#myModalConfirm').modal('hide')
+  $('#settingsModalID').modal('show')
 }
 
 function closeNote() {
