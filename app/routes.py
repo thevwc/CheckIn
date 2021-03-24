@@ -116,7 +116,7 @@ def checkIn():
         sqlCheckInRecord += "WHERE Member_ID = '" + villageID + "' "
         sqlCheckInRecord += "AND Check_Out_Date_Time Is Null "
         sqlCheckInRecord += "AND Format(Check_In_Date_Time,'yyyy-MM-dd') = '" + str(todaysDate) + "' "
-        sqlCheckInRecord += "AND Shop_Number = '" + str(shopNumber) + "'"
+        #sqlCheckInRecord += "AND Shop_Number = '" + str(shopNumber) + "'"
        
        # Look for current checkin in the table tblMember_Activity
         memberCheckedIn = False 
@@ -145,6 +145,7 @@ def checkIn():
         else:
             # IS MEMBER CHECKED INTO THIS SHOP?
             #if checkInLocation != shopNumber :
+                
             processCheckOut(recordID)
             est = timezone('EST')
             response_body = {
