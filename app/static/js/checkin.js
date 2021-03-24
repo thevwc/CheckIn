@@ -1,14 +1,7 @@
   var curNumber="";
   var entry = "";
-  var typeOfWork="General"
-  
-  // isDBA = false
-  // isMgr = false
-  // if (!localStorage.getItem('isDBA'))
-
-  // isDBA = localStorage.getItem('isDBA')
-  // isMgr = localStorage.getItem('isMgr')
-
+  var typeOfWork=""
+  var currentLocation = document.getElementById('shopID').value
 
   if (!localStorage.getItem('delaySec')) {
     localStorage.setItem('delaySec',5)
@@ -25,7 +18,6 @@
   // SET UP LISTENER FOR BARCODE SCANNER INPUT
   memberInput = document.getElementById('memberInput')
   memberInput.addEventListener('input',checkForScannerInput)
-  //memberInput.addEventListener('change',memberInputChanged)
   
   // SET UP LISTENERS FOR SETTINGS BUTTONS
   $(".cancelBtn").click(function() {
@@ -40,47 +32,10 @@
   function updateSettings(settingsForm) {
     delayInSeconds = settingsForm.delayTime.value
     localStorage.setItem('delaySec',delayInSeconds)
-    delayInMilliseconds = delayInSeconds * 1000
-    
-    currentLocation = settingsForm.locationOption.value
-    localStorage.setItem('clientLocation',currentLocation)
-    if (currentLocation == 'RA') {
-      document.getElementById("locationID").innerHTML = 'Rolling Acres'
-    }
-    if (currentLocation == 'BW') {
-      document.getElementById("locationID").innerHTML = 'Brownwood'
-    } 
-    
+    delayInMilliseconds = delayInSeconds * 1000  
   }
 
-  
-  // IF clientLocation IS NOT FOUND IN LOCAL STORAGE
-  // THEN ASSUME ROLLING ACRES
-  currentLocation = localStorage.getItem('clientLocation')
-  switch(currentLocation){
-    case 'RA':
-      document.getElementById("locationID").innerHTML = 'Rolling Acres'
-      document.getElementById("locationOptionRA").setAttribute('checked',true)
-      document.getElementById("locationOptionBW").removeAttribute('checked')
-      break;
-    case 'BW':
-      document.getElementById("locationID").innerHTML = 'Brownwood'
-      document.getElementById("locationOptionBW").setAttribute('checked',true)
-      document.getElementById("locationOptionRA").removeAttribute('checked')
-      break;
-    default:
-      document.getElementById("locationID").innerHTML = 'Rolling Acres'
-      localStorage.setItem('clientLocation','RA')
-      document.getElementById("locationID").innerHTML = 'Rolling Acres'
-      document.getElementById("locationOptionRA").setAttribute('checked',true)
-      document.getElementById("locationOptionBW").removeAttribute('checked')
-      currentLocation = 'RA'
-      
-  }
-  // PROMPT USER TO CHECK THE LOCATION
-  msg='Please check the location at the top of the screen.'
-  modalConfirm("LOCATION",msg,'Ok','Change')
-  
+   
 
   // SHOW TYPE OF WORK AND KEYPAD AREAS OF SCREEN
   document.getElementById('typeOfWorkID').style.display='block';
@@ -124,8 +79,8 @@
         typeOfWork = entry;
       }
       else {
-        typeOfWork = 'General'
-        document.getElementById("typeOfWork").value = 'General'
+        typeOfWork = ''
+        document.getElementById("typeOfWork").value = ''
       }
     }
     else {
@@ -169,7 +124,7 @@ function processCheckIn() {
     // Send data to server
     try { 
       if (typeOfWork == null | typeOfWork == ''){
-        typeOfWork = 'General'
+        typeOfWork = ''
       }    
       var data = JSON.stringify({"memberID":curNumber, "typeOfWork":typeOfWork,'location':currentLocation});
       xhr.send(data);
@@ -202,7 +157,7 @@ function processCheckIn() {
       // Restricted
       if (result.status == 'Restricted') {
         document.getElementById("memberName").value = result.memberName;
-        document.getElementById("typeOfWork").value = "General";
+        document.getElementById("typeOfWork").value = "";
         document.getElementById("checkInTime").value = "";
         document.getElementById("checkOutTime").value = "";
 
@@ -269,8 +224,8 @@ function processCheckIn() {
     entry='';
     curNumber="";
     document.getElementById("memberName").value = "";
-    document.getElementById("typeOfWork").value = "General";
-    typeOfWork = 'General'
+    document.getElementById("typeOfWork").value = "";
+    typeOfWork = ''
     document.getElementById("memberInput").value = "";
     document.getElementById("checkInTime").value = "";
     document.getElementById("checkOutTime").value = "";

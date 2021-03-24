@@ -1,6 +1,6 @@
 # routes.py
 
-from flask import render_template, flash, redirect, url_for, request, jsonify, json, make_response
+from flask import render_template, flash, redirect, session, url_for, request, jsonify, json, make_response
 from flask_bootstrap import Bootstrap
 from werkzeug.urls import url_parse
 from app.models import ShopName, Member , MemberActivity, NotesToMembers
@@ -16,10 +16,12 @@ from pytz import timezone
 @app.route('/index')
 @app.route('/index/')
 def index():
-    return render_template("checkin.html")
+    shopID = getShopID()
+    return render_template("checkin.html",shopID=shopID)
 
 @app.route('/checkIn', methods=["GET","POST"])
 def checkIn():
+    shopID = getShopID()
     if request.method != 'POST':
         return
     requestData = request.get_json()
@@ -49,7 +51,7 @@ def checkIn():
         if (m.Default_Type_Of_Work != None and m.Default_Type_Of_Work != ''):
             typeOfWorkToUse = m.Default_Type_Of_Work
         
-        if (typeOfWorkOverride != "General"):
+        if (typeOfWorkOverride != ""):
             typeOfWorkToUse = typeOfWorkOverride
 
         certified1 = m.Certified
@@ -223,3 +225,10 @@ def deleteNote():
             }
         res = make_response(jsonify(response_body),200)
         return(res)    
+
+def getShopID():
+    if 'shopID' in session:
+        shopID = session['shopID']
+    else:
+        shopID = 'RA'
+    return shopID
