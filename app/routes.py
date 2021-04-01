@@ -130,7 +130,7 @@ def checkIn():
             memberCheckedIn = True
 
         #Is member checked in?
-        est = timezone('EST')
+        est = timezone('US/Eastern')
         if not memberCheckedIn:
             processCheckIn(villageID,typeOfWorkToUse,shopNumber)
             response_body = {
@@ -147,7 +147,7 @@ def checkIn():
             #if checkInLocation != shopNumber :
                 
             processCheckOut(recordID)
-            est = timezone('EST')
+            est = timezone('US/Eastern')
             response_body = {
                 "status": "Check Out",
                 "memberName": memberName,
@@ -168,7 +168,7 @@ def checkIn():
     return(res)
 
 def processCheckIn(villageID,typeOfWork,shopNumber):
-    est = timezone('EST')
+    est = timezone('US/Eastern')
     checkInDateTime = datetime.datetime.now(est)
       
     try:
@@ -184,7 +184,7 @@ def processCheckIn(villageID,typeOfWork,shopNumber):
     return
 
 def processCheckOut(recordID):
-    est = timezone('EST')
+    est = timezone('US/Eastern')
     checkOutDateTime = datetime.datetime.now(est)
     try:
         activity = db.session.query(MemberActivity).filter(MemberActivity.ID == recordID).one()
