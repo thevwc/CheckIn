@@ -143,8 +143,6 @@ def checkIn():
             res = make_response(jsonify(response_body),200)
             return(res)
         else:
-            # IS MEMBER CHECKED INTO THIS SHOP?
-            #if checkInLocation != shopNumber :
                 
             processCheckOut(recordID)
             est = timezone('US/Eastern')
@@ -157,6 +155,18 @@ def checkIn():
                 "note": note
             }
             res = make_response(jsonify(response_body),200)
+
+            # WAS MEMBER CHECKED INTO ANOTHER LOCATION, IF SO CHECK THEM IN TO THIS LOCATION?
+            if checkInLocation != shopNumber :
+                processCheckIn(villageID,typeOfWorkToUse,shopNumber)
+                response_body = {
+                    "status": "Check In",
+                    "memberName": memberName,
+                    "checkInTime":datetime.datetime.now(est).strftime('%I:%M %p'),
+                    "typeOfWork": typeOfWorkToUse,
+                    "note": note
+                }
+                res = make_response(jsonify(response_body),200)
             return(res)
 
     # If no condition is met return the following -
