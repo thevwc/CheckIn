@@ -163,7 +163,7 @@ function processCheckIn() {
 
         // NAME IS NOT BEING DISPLAYED BEFORE ALERT MESSAGE 
         
-        title = "CHECK IN STATUS FOR " + result.memberName       
+        title = result.memberName       
         msg = "You are currently restricted from the shop for the following reason:<br><br>" + result.reason
         modalAlert(title,msg)
         clearScreen()
