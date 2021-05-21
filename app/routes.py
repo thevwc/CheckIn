@@ -38,10 +38,22 @@ def checkIn():
             shopNumber = 0
     
     # Look up member ID
-    sqlSelect = """ SELECT Member_ID, First_Name, Last_Name, NonMember_Volunteer, Certified, Certified_2,Default_Type_Of_Work, Restricted_From_Shop, Reason_For_Restricted_From_Shop, noteToMember
-        FROM tblMember_Data LEFT JOIN notesToMembers ON tblMember_Data.Member_ID = notesToMembers.memberID
-        WHERE tblMember_Data.Member_ID='""" + villageID + """'"""
-    member = db.engine.execute(sqlSelect)
+    sqlSelect = "SELECT Member_ID, First_Name, Last_Name, NonMember_Volunteer, Certified, Certified_2,Default_Type_Of_Work, "
+    sqlSelect += "Restricted_From_Shop, Reason_For_Restricted_From_Shop, noteToMember, "
+    sqlSelect += "Villages_Waiver_Signed, Temporary_ID_Expiration_Date "
+    sqlSelect += "FROM tblMember_Data LEFT JOIN notesToMembers ON tblMember_Data.Member_ID = notesToMembers.memberID "
+    sqlSelect += "WHERE tblMember_Data.Member_ID='" + villageID + "'"
+    try:
+        member = db.engine.execute(sqlSelect)
+    except SQLAlchemyError as e:
+        error = str(e.__dict__['orig'])
+        response_body = {
+            "status" :"Member Not in database.",
+            "note" : "None"
+        }
+        res = make_response(jsonify(response_body),200)
+        return(res)
+    
     row = 0
     for m in member:
         row += 1
@@ -59,6 +71,23 @@ def checkIn():
         restricted = m.Restricted_From_Shop
         reasonRestricted = m.Reason_For_Restricted_From_Shop
         volunteer = m.NonMember_Volunteer
+
+        # CHECK FOR VILLAGES WAIVER NOT SIGNED
+        if (m.Villages_Waiver_Signed != True):
+            restricted = True
+            reasonRestricted += "\nThe Villages Waiver form has not been signed."
+        
+        # CHECK FOR EXPIRED TEMPORARY VILLAGE ID
+        est = timezone('America/New_York')
+        curDateTime = datetime.datetime.now()
+        emptyDate = datetime.datetime(1900, 1, 1, 0, 0)
+       
+        if m.Temporary_ID_Expiration_Date != None \
+        and m.Temporary_ID_Expiration_Date != '' \
+        and m.Temporary_ID_Expiration_Date != emptyDate:
+            if (m.Temporary_ID_Expiration_Date < curDateTime):
+                restricted = True
+                reasonRestricted = "\nYour Village ID is no longer valid."
 
     # Were any records found?
     if row == 0:

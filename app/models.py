@@ -48,7 +48,8 @@ class Member(db.Model):
     Dues_Paid=db.Column(db.Boolean)
     NonMember_Volunteer=db.Column(db.Boolean)
     Restricted_From_Shop = db.Column(db.Boolean)
-	
+    Villages_Waiver_Signed = db.Column(db.Boolean)
+    Temporary_Village_ID_Expiration_Date = db.Column(db.DateTime)
     fullName = column_property(First_Name + " " + Last_Name)
 
     def wholeName(self):
