@@ -116,7 +116,7 @@ def checkIn():
         return(res)
 
     # Is member certified?
-    if shopNumber == '1' and not certified1 and not volunteer:
+    if shopNumber == 1 and not certified1 and not volunteer:
         response_body = {
         "status" :"Not Certified",
         "msg": "Not certified for ROLLING ACRES",
@@ -125,7 +125,7 @@ def checkIn():
         res = make_response(jsonify(response_body),200)
         return(res)
            
-    if shopNumber == '2' and not certified2 and not volunteer:
+    if shopNumber == 2 and not certified2 and not volunteer:
         response_body = {
         "status" :"Not Certified",
         "msg": "Not certified for BROWNWOOD",

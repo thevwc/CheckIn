@@ -145,7 +145,7 @@ function processCheckIn() {
         clearScreen()
         return
       }  
-
+     
       // Not certified
       if (result.status == 'Not Certified') {
         document.getElementById("memberName").value = result.memberName;
@@ -233,7 +233,6 @@ function processCheckIn() {
   }
 
   function modalAlert(title,msg) {
-    //alert("Title - " + title + '\n Message - '+msg)
     document.getElementById("modalTitle").innerHTML = title
     document.getElementById("modalBody").innerHTML= msg
     $('#myModalMsg').modal('show')

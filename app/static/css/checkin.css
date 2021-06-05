@@ -73,6 +73,7 @@ html {
   background-color: navy;
   color:white;
   text-align: center;
+  margin-left:5px;
   padding-left:10px;
   border-radius: 5px;
 }
