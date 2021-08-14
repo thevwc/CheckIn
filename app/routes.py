@@ -7,6 +7,7 @@ from app.models import ShopName, Member , MemberActivity, NotesToMembers
 from app import app
 from app import db
 from sqlalchemy import func, case, desc, extract, select, update
+from sqlalchemy.sql import text as SQLQuery
 from sqlalchemy.exc import SQLAlchemyError 
 import datetime
 from datetime import date
@@ -209,7 +210,30 @@ def checkIn():
 def processCheckIn(villageID,typeOfWork,shopNumber):
     est = timezone('America/New_York')
     checkInDateTime = datetime.datetime.now(est)
-      
+
+    # Is the member on monitor duty today?
+    currentHour = datetime.datetime.now(est).hour
+    print('hour - ',currentHour)
+    if currentHour < 11:
+        # Check for AM monitor
+        sp = "EXEC isAMmonitor " + villageID + ", " + str(shopNumber)
+        sql = SQLQuery(sp)
+        isAMmonitor = db.engine.execute(sql)
+        if isAMmonitor:
+            print('is an AM monitor today')
+            typeOfWork = 'Monitor'
+    else:
+        # Check for PM monitor
+        sp = "EXEC isPMmonitor " + villageID + ", " + str(shopNumber)
+        sql = SQLQuery(sp)
+        isPMmonitor = db.engine.execute(sql)
+        if isPMmonitor:
+            print('is an PM monitor today')
+            typeOfWork = 'Monitor'
+    print('sp - ',sp)
+    print('typeOfWork - ', typeOfWork)
+
+   
     try:
         activity = MemberActivity(Member_ID=villageID,Check_In_Date_Time=checkInDateTime,Type_Of_Work=typeOfWork,Shop_Number=int(shopNumber),Door_Used='Front')
         db.session.add(activity)
