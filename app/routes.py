@@ -220,7 +220,6 @@ def processCheckIn(villageID,typeOfWork,shopNumber):
         sql = SQLQuery(sp)
         isAMmonitor = db.engine.execute(sql)
         if isAMmonitor:
-            print('is an AM monitor today')
             typeOfWork = 'Monitor'
     else:
         # Check for PM monitor
@@ -228,11 +227,7 @@ def processCheckIn(villageID,typeOfWork,shopNumber):
         sql = SQLQuery(sp)
         isPMmonitor = db.engine.execute(sql)
         if isPMmonitor:
-            print('is an PM monitor today')
             typeOfWork = 'Monitor'
-    print('sp - ',sp)
-    print('typeOfWork - ', typeOfWork)
-
    
     try:
         activity = MemberActivity(Member_ID=villageID,Check_In_Date_Time=checkInDateTime,Type_Of_Work=typeOfWork,Shop_Number=int(shopNumber),Door_Used='Front')
