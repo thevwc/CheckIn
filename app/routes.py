@@ -3,7 +3,7 @@
 from flask import render_template, flash, redirect, session, url_for, request, jsonify, json, make_response
 from flask_bootstrap import Bootstrap
 from werkzeug.urls import url_parse
-from app.models import ShopName, Member , MemberActivity, NotesToMembers
+from app.models import ShopName, Member , MemberActivity, NotesToMembers, MonitorSchedule
 from app import app
 from app import db
 from sqlalchemy import func, case, desc, extract, select, update
@@ -210,24 +210,29 @@ def checkIn():
 def processCheckIn(villageID,typeOfWork,shopNumber):
     est = timezone('America/New_York')
     checkInDateTime = datetime.datetime.now(est)
-
+    print('villageID - ',villageID)
+    print('before test for monitor, type of work - ',typeOfWork)
     # Is the member on monitor duty today?
+    todaysDate = date.today()
+    todaySTR = todaysDate.strftime('%Y-%m-%d')  
     currentHour = datetime.datetime.now(est).hour
     print('hour - ',currentHour)
     if currentHour < 11:
         # Check for AM monitor
-        sp = "EXEC isAMmonitor " + villageID + ", " + str(shopNumber)
-        sql = SQLQuery(sp)
-        isAMmonitor = db.engine.execute(sql)
-        if isAMmonitor:
+        assignedAMshift = db.session.query(MonitorSchedule)\
+            .filter(MonitorSchedule.Member_ID == villageID)\
+            .filter(MonitorSchedule.AM_PM == 'AM')\
+            .filter(MonitorSchedule.Date_Scheduled == todaySTR).first()
+        if assignedAMshift != None:
             typeOfWork = 'Monitor'
     else:
         # Check for PM monitor
-        sp = "EXEC isPMmonitor " + villageID + ", " + str(shopNumber)
-        sql = SQLQuery(sp)
-        isPMmonitor = db.engine.execute(sql)
-        if isPMmonitor:
-            typeOfWork = 'Monitor'
+        assignedPMshift = db.session.query(MonitorSchedule)\
+        .filter(MonitorSchedule.Member_ID == villageID)\
+        .filter(MonitorSchedule.AM_PM == 'PM')\
+        .filter(MonitorSchedule.Date_Scheduled == todaySTR).first()
+        if assignedPMshift != None:
+              typeOfWork = 'Monitor'
    
     try:
         activity = MemberActivity(Member_ID=villageID,Check_In_Date_Time=checkInDateTime,Type_Of_Work=typeOfWork,Shop_Number=int(shopNumber),Door_Used='Front')

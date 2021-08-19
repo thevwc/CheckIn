@@ -70,7 +70,15 @@ class MemberActivity(db.Model):
     Type_Of_Work = db.Column(db.String(20))
     Shop_Number = db.Column(db.Integer)
     Door_Used = db.Column(db.String(5))
-	
+
+class MonitorSchedule(db.Model):
+    __tablename__ = 'tblMonitor_Schedule'
+    ID = db.Column(db.Integer)
+    Member_ID = db.Column(db.String(6),primary_key=True)
+    Date_Scheduled = db.Column(db.DateTime,primary_key=True)
+    Duty = db.Column(db.String(10))
+    AM_PM = db.Column(db.String(2),primary_key=True)
+
 
 class NotesToMembers(db.Model):
 	__tablename__ = "notesToMembers"
