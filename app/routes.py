@@ -210,13 +210,12 @@ def checkIn():
 def processCheckIn(villageID,typeOfWork,shopNumber):
     est = timezone('America/New_York')
     checkInDateTime = datetime.datetime.now(est)
-    print('villageID - ',villageID)
-    print('before test for monitor, type of work - ',typeOfWork)
+   
     # Is the member on monitor duty today?
     todaysDate = date.today()
     todaySTR = todaysDate.strftime('%Y-%m-%d')  
     currentHour = datetime.datetime.now(est).hour
-    print('hour - ',currentHour)
+    
     if currentHour < 11:
         # Check for AM monitor
         assignedAMshift = db.session.query(MonitorSchedule)\
