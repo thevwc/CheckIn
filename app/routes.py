@@ -212,7 +212,7 @@ def processCheckIn(villageID,typeOfWork,shopNumber):
     checkInDateTime = datetime.datetime.now(est)
    
     # Is the member on monitor duty today?
-    todaysDate = date.today()
+    todaysDate = date.today(est)
     todaySTR = todaysDate.strftime('%Y-%m-%d')  
     currentHour = datetime.datetime.now(est).hour
     
