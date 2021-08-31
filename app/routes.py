@@ -22,13 +22,13 @@ def index():
 
 @app.route('/checkIn', methods=["GET","POST"])
 def checkIn():
+    print('... begin checkIn routine ...')
     shopID = getShopID()
     if request.method != 'POST':
         return
+    #restricted = False
     requestData = request.get_json()
     villageID = requestData.get("memberID")
-    typeOfWorkOverride = requestData.get("typeOfWork")
-
     location = requestData.get("location")
     if location == 'RA':
         shopNumber = 1
@@ -38,12 +38,57 @@ def checkIn():
         else:
             shopNumber = 0
     
-    # Look up member ID
+    # IS MEMBER ALREADY CHECKED IN?
+    # Look for current checkin in the table tblMember_Activity
+    memberCheckedIn = False 
+    typeOfWorkAtCheckIn=""
+    sqlCheckInRecord = "SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, "
+    sqlCheckInRecord += "Type_Of_Work, Shop_Number "
+    sqlCheckInRecord += "FROM tblMember_Activity "
+    sqlCheckInRecord += "WHERE Member_ID = '" + villageID + "' "
+    sqlCheckInRecord += "AND Check_Out_Date_Time Is Null "
+    sqlCheckInRecord += "AND Format(Check_In_Date_Time,'yyyy-MM-dd') = '" + str(todaysDate) + "' "
+    activity = db.engine.execute(sqlCheckInRecord)
+    for a in activity:
+        recordID = a.ID
+        typeOfWorkAtCheckIn = a.Type_Of_Work
+        checkInTime = a.Check_In_Date_Time
+        checkInLocation = a.Shop_Number
+        memberCheckedIn = True
+
+    #Is member already checked in?
+    est = timezone('America/New_York')
+    if memberCheckedIn:
+        processCheckOut(recordID)
+        # WAS MEMBER CHECKED INTO THIS LOCATION?  IF SO, CHECK THEM OUT AND RETURN TO INPUT PROMPT
+        if checkInLocation == shopNumber:
+            est = timezone('America/New_York')
+            member = db.session.query('Member').filter(Member.Member_ID == memberID).first()
+            villageID = member.Member_ID
+            memberName = member.First_Name + " " + member.Last_Name
+            response_body = {
+                "status": "Check Out",
+                "memberName": memberName,
+                "checkInTime": checkInTime.strftime('%I:%M %p'),
+                "checkOutTime":datetime.datetime.now(est).strftime('%I:%M %p'),
+                "typeOfWork": typeOfWorkAtCheckIn,
+                "note": note
+            }
+            res = make_response(jsonify(response_body),200)
+        
+    # IF MEMBER WAS CHECKED IN TO ANOTHER LOCATION OR WAS NOT CHECKED IN
+    # THEN CONTINUE WITH CHECK IN ROUTINE
+    typeOfWorkOverride = requestData.get("typeOfWork")
+
+    
+    # Retrieve member name, certifications, restrictions, notes
     sqlSelect = "SELECT Member_ID, First_Name, Last_Name, NonMember_Volunteer, Certified, Certified_2,Default_Type_Of_Work, "
     sqlSelect += "Restricted_From_Shop, Reason_For_Restricted_From_Shop, noteToMember, "
     sqlSelect += "Villages_Waiver_Signed, Temporary_ID_Expiration_Date "
     sqlSelect += "FROM tblMember_Data LEFT JOIN notesToMembers ON tblMember_Data.Member_ID = notesToMembers.memberID "
     sqlSelect += "WHERE tblMember_Data.Member_ID='" + villageID + "'"
+    print('sqlSelect - ', sqlSelect)
+
     try:
         member = db.engine.execute(sqlSelect)
     except SQLAlchemyError as e:
@@ -60,6 +105,7 @@ def checkIn():
         row += 1
         villageID = m.Member_ID
         memberName = m.First_Name + " " + m.Last_Name
+        print('memberName - ',memberName)
         typeOfWorkToUse = "General"
         if (m.Default_Type_Of_Work != None and m.Default_Type_Of_Work != ''):
             typeOfWorkToUse = m.Default_Type_Of_Work
@@ -135,77 +181,81 @@ def checkIn():
         res = make_response(jsonify(response_body),200)
         return(res)
     
-    # Member, or volunteer is not restricted so may be checked in/out
-    if not restricted:
-        # Retrieve today's check in record, if any, for this member
-        todaysDate = date.today()
+    # MEMBER, OR VOLUNTEER, IS NOT RESTRICTED
+    # AND THEY ARE NOT ALREADY CHECKED IN TO EITHER LOCATION,
+    # SO THEY MAY BE CHECKED IN
+
+    
+    # if not restricted:
+    #     # Retrieve today's check in record, if any, for this member
+    #     todaysDate = date.today()
         
-        sqlCheckInRecord = "SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, "
-        sqlCheckInRecord += "Type_Of_Work, Shop_Number "
-        sqlCheckInRecord += "FROM tblMember_Activity "
-        sqlCheckInRecord += "WHERE Member_ID = '" + villageID + "' "
-        sqlCheckInRecord += "AND Check_Out_Date_Time Is Null "
-        sqlCheckInRecord += "AND Format(Check_In_Date_Time,'yyyy-MM-dd') = '" + str(todaysDate) + "' "
-        #sqlCheckInRecord += "AND Shop_Number = '" + str(shopNumber) + "'"
+    #     sqlCheckInRecord = "SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, "
+    #     sqlCheckInRecord += "Type_Of_Work, Shop_Number "
+    #     sqlCheckInRecord += "FROM tblMember_Activity "
+    #     sqlCheckInRecord += "WHERE Member_ID = '" + villageID + "' "
+    #     sqlCheckInRecord += "AND Check_Out_Date_Time Is Null "
+    #     sqlCheckInRecord += "AND Format(Check_In_Date_Time,'yyyy-MM-dd') = '" + str(todaysDate) + "' "
+    #     #sqlCheckInRecord += "AND Shop_Number = '" + str(shopNumber) + "'"
        
-       # Look for current checkin in the table tblMember_Activity
-        memberCheckedIn = False 
-        typeOfWorkAtCheckIn=""
-        activity = db.engine.execute(sqlCheckInRecord)
-        for a in activity:
-            recordID = a.ID
-            typeOfWorkAtCheckIn = a.Type_Of_Work
-            checkInTime = a.Check_In_Date_Time
-            checkInLocation = a.Shop_Number
-            memberCheckedIn = True
+    #    # Look for current checkin in the table tblMember_Activity
+    #     memberCheckedIn = False 
+    #     typeOfWorkAtCheckIn=""
+    #     activity = db.engine.execute(sqlCheckInRecord)
+    #     for a in activity:
+    #         recordID = a.ID
+    #         typeOfWorkAtCheckIn = a.Type_Of_Work
+    #         checkInTime = a.Check_In_Date_Time
+    #         checkInLocation = a.Shop_Number
+    #         memberCheckedIn = True
 
-        #Is member checked in?
-        est = timezone('America/New_York')
-        if not memberCheckedIn:
-            processCheckIn(villageID,typeOfWorkToUse,shopNumber)
-            response_body = {
-                "status": "Check In",
-                "memberName": memberName,
-                "checkInTime":datetime.datetime.now(est).strftime('%I:%M %p'),
-                "typeOfWork": typeOfWorkToUse,
-                "note": note
-            }
-            res = make_response(jsonify(response_body),200)
-            return(res)
-        else:
-                
-            processCheckOut(recordID)
-            est = timezone('America/New_York')
-            response_body = {
-                "status": "Check Out",
-                "memberName": memberName,
-                "checkInTime": checkInTime.strftime('%I:%M %p'),
-                "checkOutTime":datetime.datetime.now(est).strftime('%I:%M %p'),
-                "typeOfWork": typeOfWorkAtCheckIn,
-                "note": note
-            }
-            res = make_response(jsonify(response_body),200)
-
-            # WAS MEMBER CHECKED INTO ANOTHER LOCATION, IF SO CHECK THEM IN TO THIS LOCATION?
-            if checkInLocation != shopNumber :
-                processCheckIn(villageID,typeOfWorkToUse,shopNumber)
-                response_body = {
-                    "status": "Check In",
-                    "memberName": memberName,
-                    "checkInTime":datetime.datetime.now(est).strftime('%I:%M %p'),
-                    "typeOfWork": typeOfWorkToUse,
-                    "note": note
-                }
-                res = make_response(jsonify(response_body),200)
-            return(res)
-
-    # If no condition is met return the following -
+    #     #Is member checked in?
+    #     est = timezone('America/New_York')
+    #     if not memberCheckedIn:
+    processCheckIn(villageID,typeOfWorkToUse,shopNumber)
     response_body = {
-        "status" :"Error",
+        "status": "Check In",
+        "memberName": memberName,
+        "checkInTime":datetime.datetime.now(est).strftime('%I:%M %p'),
+        "typeOfWork": typeOfWorkToUse,
         "note": note
     }
     res = make_response(jsonify(response_body),200)
     return(res)
+        # else:
+                
+        #     processCheckOut(recordID)
+        #     est = timezone('America/New_York')
+        #     response_body = {
+        #         "status": "Check Out",
+        #         "memberName": memberName,
+        #         "checkInTime": checkInTime.strftime('%I:%M %p'),
+        #         "checkOutTime":datetime.datetime.now(est).strftime('%I:%M %p'),
+        #         "typeOfWork": typeOfWorkAtCheckIn,
+        #         "note": note
+        #     }
+        #     res = make_response(jsonify(response_body),200)
+
+        #     # WAS MEMBER CHECKED INTO ANOTHER LOCATION, IF SO CHECK THEM IN TO THIS LOCATION?
+        #     if checkInLocation != shopNumber :
+        #         processCheckIn(villageID,typeOfWorkToUse,shopNumber)
+        #         response_body = {
+        #             "status": "Check In",
+        #             "memberName": memberName,
+        #             "checkInTime":datetime.datetime.now(est).strftime('%I:%M %p'),
+        #             "typeOfWork": typeOfWorkToUse,
+        #             "note": note
+        #         }
+        #         res = make_response(jsonify(response_body),200)
+        #     return(res)
+
+    # If no condition is met return the following -
+    # response_body = {
+    #     "status" :"Error",
+    #     "note": note
+    # }
+    # res = make_response(jsonify(response_body),200)
+    # return(res)
 
 def processCheckIn(villageID,typeOfWork,shopNumber):
     est = timezone('America/New_York')
