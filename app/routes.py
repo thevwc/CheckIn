@@ -22,7 +22,6 @@ def index():
 
 @app.route('/checkIn', methods=["GET","POST"])
 def checkIn():
-    print('... begin checkIn routine ...')
     shopID = getShopID()
     if request.method != 'POST':
         return
@@ -42,6 +41,7 @@ def checkIn():
     # Look for current checkin in the table tblMember_Activity
     memberCheckedIn = False 
     typeOfWorkAtCheckIn=""
+    todaysDate = date.today()
     sqlCheckInRecord = "SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, "
     sqlCheckInRecord += "Type_Of_Work, Shop_Number "
     sqlCheckInRecord += "FROM tblMember_Activity "
@@ -60,11 +60,11 @@ def checkIn():
     est = timezone('America/New_York')
     if memberCheckedIn:
         processCheckOut(recordID)
+
         # WAS MEMBER CHECKED INTO THIS LOCATION?  IF SO, CHECK THEM OUT AND RETURN TO INPUT PROMPT
         if checkInLocation == shopNumber:
             est = timezone('America/New_York')
-            member = db.session.query('Member').filter(Member.Member_ID == memberID).first()
-            villageID = member.Member_ID
+            member = db.session.query(Member).filter(Member.Member_ID == villageID).first()
             memberName = member.First_Name + " " + member.Last_Name
             response_body = {
                 "status": "Check Out",
@@ -72,10 +72,12 @@ def checkIn():
                 "checkInTime": checkInTime.strftime('%I:%M %p'),
                 "checkOutTime":datetime.datetime.now(est).strftime('%I:%M %p'),
                 "typeOfWork": typeOfWorkAtCheckIn,
-                "note": note
+                "note": ""
             }
             res = make_response(jsonify(response_body),200)
-        
+            return (res)
+
+            
     # IF MEMBER WAS CHECKED IN TO ANOTHER LOCATION OR WAS NOT CHECKED IN
     # THEN CONTINUE WITH CHECK IN ROUTINE
     typeOfWorkOverride = requestData.get("typeOfWork")
@@ -87,7 +89,6 @@ def checkIn():
     sqlSelect += "Villages_Waiver_Signed, Temporary_ID_Expiration_Date "
     sqlSelect += "FROM tblMember_Data LEFT JOIN notesToMembers ON tblMember_Data.Member_ID = notesToMembers.memberID "
     sqlSelect += "WHERE tblMember_Data.Member_ID='" + villageID + "'"
-    print('sqlSelect - ', sqlSelect)
 
     try:
         member = db.engine.execute(sqlSelect)
@@ -105,7 +106,6 @@ def checkIn():
         row += 1
         villageID = m.Member_ID
         memberName = m.First_Name + " " + m.Last_Name
-        print('memberName - ',memberName)
         typeOfWorkToUse = "General"
         if (m.Default_Type_Of_Work != None and m.Default_Type_Of_Work != ''):
             typeOfWorkToUse = m.Default_Type_Of_Work

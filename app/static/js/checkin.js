@@ -177,7 +177,7 @@ function processCheckIn() {
         document.getElementById("checkOutTime").value = result.checkOutTime;
       
         // DISPLAY NOTE IF ONE EXISTS
-        if (result.note != 'None') {
+        if (result.note != 'None' & result.note != '') {
           document.getElementById("modalNoteTitle").innerHTML = 'Note to ' + result.memberName
           document.getElementById("noteID").value = result.note
           document.getElementById("memberID").value = curNumber
