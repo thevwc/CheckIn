@@ -22,6 +22,7 @@ def index():
 
 @app.route('/checkIn', methods=["GET","POST"])
 def checkIn():
+    print('... begin checkIn routine ...')
     shopID = getShopID()
     if request.method != 'POST':
         return
@@ -48,13 +49,16 @@ def checkIn():
     sqlCheckInRecord += "WHERE Member_ID = '" + villageID + "' "
     sqlCheckInRecord += "AND Check_Out_Date_Time Is Null "
     sqlCheckInRecord += "AND Format(Check_In_Date_Time,'yyyy-MM-dd') = '" + str(todaysDate) + "' "
+    print('todaysDate - ',todaysDate)
     activity = db.engine.execute(sqlCheckInRecord)
+    print('display current checkIn records without a checkOut time ...')
     for a in activity:
         recordID = a.ID
         typeOfWorkAtCheckIn = a.Type_Of_Work
         checkInTime = a.Check_In_Date_Time
         checkInLocation = a.Shop_Number
         memberCheckedIn = True
+        print('data in tblMember_Activity table: villageID - ', villageID, ' checkInTime - ',checkInTime)
 
     #Is member already checked in?
     est = timezone('America/New_York')
