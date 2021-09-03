@@ -43,14 +43,21 @@ def checkIn():
     memberCheckedIn = False 
     typeOfWorkAtCheckIn=""
     todaysDate = date.today()
-    sqlCheckInRecord = "SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, "
-    sqlCheckInRecord += "Type_Of_Work, Shop_Number "
-    sqlCheckInRecord += "FROM tblMember_Activity "
-    sqlCheckInRecord += "WHERE Member_ID = '" + villageID + "' "
-    sqlCheckInRecord += "AND Check_Out_Date_Time Is Null "
-    sqlCheckInRecord += "AND Format(Check_In_Date_Time,'yyyy-MM-dd') = '" + str(todaysDate) + "' "
+    # sqlCheckInRecord = "SELECT ID, Member_ID, Check_In_Date_Time, Check_Out_Date_Time, "
+    # sqlCheckInRecord += "Type_Of_Work, Shop_Number "
+    # sqlCheckInRecord += "FROM tblMember_Activity "
+    # sqlCheckInRecord += "WHERE Member_ID = '" + villageID + "' "
+    # sqlCheckInRecord += "AND Check_Out_Date_Time Is Null "
+    # sqlCheckInRecord += "AND Format(Check_In_Date_Time,'yyyy-MM-dd') = '" + str(todaysDate) + "' "
     print('todaysDate - ',todaysDate)
-    activity = db.engine.execute(sqlCheckInRecord)
+    # activity = db.engine.execute(sqlCheckInRecord)
+    sp = "EXEC memberCheckInsNotOut '" + villageID + "', '" + str(todaysDate) + "'"
+    sql = SQLQuery(sp)
+    activity = db.engine.execute(sql)
+
+
+
+
     print('display current checkIn records without a checkOut time ...')
     for a in activity:
         recordID = a.ID
